@@ -9,12 +9,17 @@
     <title>Laravel</title>
 
     <link rel="stylesheet" href="{{ 'css/app.css' }}">
+    <link rel="stylesheet" href="{{ 'css/main.css' }}">
 </head>
 <body>
-<div id="app">
-    <h1>HOGE</h1>
-    <div class="container">
+<div id="app" class="wrap">
+    <div class="header">
+        <div>main</div>
+    </div>
+    <div class="contents">
         <router-view></router-view>
+    </div>
+    <div class="footer">
     </div>
 </div>
 </body>

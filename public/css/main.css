@@ -1,0 +1,14 @@
+.wap{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    height: 100px;
+}
+.contents{
+    flex: 1;
+}
+.footer{
+    height: 100px;
+}
