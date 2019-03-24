@@ -10,7 +10,6 @@ class ReportControllerTest extends TestCase
     public function testReport()
     {
         $controller = app(ReportController::class);
-        $controller->Report();
-        $this->assertTrue(true);
+        $this->assertTrue($controller->Report());
     }
 }
