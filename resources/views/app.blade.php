@@ -9,19 +9,19 @@
     <title>Laravel</title>
 
     <link rel="stylesheet" href="{{ 'css/app.css' }}">
-    <link rel="stylesheet" href="{{ 'css/main.css' }}">
 </head>
 <body>
 <div id="app" class="wrap">
-    <div class="header">
-        <div>main</div>
-    </div>
-    <div class="contents">
-        <router-view></router-view>
-    </div>
-    <div class="footer">
-    </div>
+    <router-view></router-view>
 </div>
+<style>
+    .wrap{
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+    }
+</style>
 </body>
 <script src="{{ 'js/app.js' }}"></script>
 </html>
