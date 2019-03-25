@@ -7,6 +7,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueLocalStorage from 'vue-localstorage'
+import BootstrapVue from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 require('./bootstrap');
 
@@ -27,6 +30,7 @@ require('./bootstrap');
 
 Vue.use(VueRouter);
 Vue.use(VueLocalStorage);
+Vue.use(BootstrapVue);
 
 const router = new VueRouter({
     mode: 'history',
