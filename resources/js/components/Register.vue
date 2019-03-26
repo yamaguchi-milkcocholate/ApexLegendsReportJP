@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="header-right">
-            <div>right</div>
+            <div></div>
         </div>
     </div>
     <div class="contents">
@@ -35,43 +35,46 @@
         </div>
         <div class="container">
             <div class="register-form">
-                <form>
-                    <!-- ID・Eメール -->
-                    <div class="form-group form-column">
-                        <!-- ID -->
-                        <div class="form-column-child-left">
-                            <label for="your-id">ID <small class="optional-notice">[任意]</small></label>
-                            <input v-model="your_id" class="form-control" id="your-id" aria-describedby="your-id-help">
-                            <small id="your-id-help" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-column-child-center"></div>
-                        <!-- Eメール -->
-                        <div class="form-column-child-right">
-                            <label for="your-email">メールアドレス</label>
-                            <input v-model="your_email" type="email" class="form-control" id="your-email" aria-describedby="your-email-help">
-                            <small id="your-email-help" class="form-text text-muted"></small>
-                        </div>
+                <!-- ID・Eメール -->
+                <div class="form-group form-column">
+                    <!-- ID -->
+                    <div class="form-column-child-left">
+                        <label for="your-id">ID <small class="optional-notice">[任意]</small></label>
+                        <input v-model="your_id" class="form-control" id="your-id" aria-describedby="your-id-help">
+                        <small id="your-id-help" class="form-text text-muted"></small>
                     </div>
-                    <!-- 名前 -->
-                    <div class="form-group form-column">
-                        <!-- Last Name -->
-                        <div class="form-column-child-right">
-                            <label for="your-last-name">性</label>
-                            <input v-model="your_last_name" class="form-control" id="your-last-name" aria-describedby="your-last-name-help">
-                            <small id="your-last-name-help" class="form-text text-muted"></small>
-                        </div>
-                        <div class="form-column-child-center"></div>
-                        <!-- First Name -->
-                        <div class="form-column-child-left">
-                            <label for="your-first-name">名<small class="optional-notice">[任意]</small></label>
-                            <input v-model="your_first_name" class="form-control" id="your-first-name" aria-describedby="your-first-name-help">
-                            <small id="your-first-name-help" class="form-text text-muted"></small>
-                        </div>
+                    <div class="form-column-child-center"></div>
+                    <!-- Eメール -->
+                    <div class="form-column-child-right">
+                        <label for="your-email">メールアドレス</label>
+                        <input v-model="your_email" type="email" class="form-control" id="your-email" aria-describedby="your-email-help">
+                        <small id="your-email-help" class="form-text text-muted"></small>
                     </div>
-                    <div class="form-submit-wrap">
-                        <button v-on:click="register" class="btn btn-primary form-submit">Submit</button>
+                </div>
+                <!-- 名前 -->
+                <div class="form-group form-column">
+                    <!-- Last Name -->
+                    <div class="form-column-child-right">
+                        <label for="your-last-name">性</label>
+                        <input v-model="your_last_name" class="form-control" id="your-last-name" aria-describedby="your-last-name-help">
+                        <small id="your-last-name-help" class="form-text text-muted"></small>
                     </div>
-                </form>
+                    <div class="form-column-child-center"></div>
+                    <!-- First Name -->
+                    <div class="form-column-child-left">
+                        <label for="your-first-name">名<small class="optional-notice">[任意]</small></label>
+                        <input v-model="your_first_name" class="form-control" id="your-first-name" aria-describedby="your-first-name-help">
+                        <small id="your-first-name-help" class="form-text text-muted"></small>
+                    </div>
+                </div>
+                <div class="form-button">
+                    <div>
+                        <button v-on:click="register" class="btn btn-outline-primary form-button-submit">登録</button>
+                    </div>
+                    <div>
+                        <button v-on:click="remove" class="btn btn-outline-danger form-button-remove">削除</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -85,10 +88,6 @@
         name: "Register",
         data: function() {
             return {
-                register_id: "",
-                register_first_name: "",
-                register_last_name: "",
-                register_email: "",
                 your_id: "",
                 your_email: "",
                 your_first_name: "",
@@ -111,17 +110,48 @@
         },
         methods: {
             register: function() {
-                this.$localStorage.set('register_id', this.register_id);
-                this.$localStorage.set('register_first_name', this.register_first_name);
-                this.$localStorage.set('register_last_name', this.register_last_name);
-                this.$localStorage.set('register_email', this.register_email);
+                this.$localStorage.set('register_id', this.your_id);
+                this.$localStorage.set('register_first_name', this.your_first_name);
+                this.$localStorage.set('register_last_name', this.your_last_name);
+                this.$localStorage.set('register_email', this.your_email);
                 this.setYou();
             },
             setYou: function() {
-                this.your_id = this.$localStorage.get('register_id');
-                this.your_first_name = this.$localStorage.get('register_first_name');
-                this.your_last_name = this.$localStorage.get('register_last_name');
-                this.your_email = this.$localStorage.get('register_email');
+                let tmp = this.$localStorage.get('register_id', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_id = "";
+                else
+                    this.your_id = tmp;
+
+                tmp = this.$localStorage.get('register_first_name', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_first_name = "";
+                else
+                    this.your_first_name = tmp;
+
+                tmp = this.$localStorage.get('register_last_name', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_last_name = "";
+                else
+                    this.your_last_name = tmp;
+
+                tmp = this.$localStorage.get('register_email', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_email = "";
+                else
+                    this.your_email = tmp;
+                console.log(tmp);
+                console.log(typeof tmp)
+            },
+            remove: function() {
+                this.$localStorage.remove('register_id');
+                this.$localStorage.remove('register_first_name');
+                this.$localStorage.remove('register_last_name');
+                this.$localStorage.remove('register_email');
+                this.your_id = "";
+                this.your_first_name = "";
+                this.your_last_name = "";
+                this.your_email = "";
             }
         },
         mounted () {
@@ -201,7 +231,6 @@
     {
         width: 100%;
         height: 400px;
-
         background: #FFF url("../../../public/eye-catch-edit.jpg") no-repeat center top scroll;
     }
     .form-column
@@ -229,17 +258,19 @@
     {
 
     }
-    .form-submit
+    .form-button-submit, .form-button-remove
     {
-        margin: 10px auto;
-        display: block;
-        width: 200px;
-        padding: 10px 0;
+        box-sizing: border-box;
+        padding: 10px 80px;
+        margin: 20px 40px;
+        font-weight: bold;
     }
-    .form-submit-wrap
+    .form-button
     {
         margin-top: 10px;
         margin-bottom: 100px;
+        display: flex;
+        justify-content: center;
     }
     .report-nav
     {
@@ -251,6 +282,7 @@
     {
         color: black;
         font-weight: bold;
+        width: 250px;
     }
     .report-nav-el-active
     {

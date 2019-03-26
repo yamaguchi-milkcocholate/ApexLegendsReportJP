@@ -21,7 +21,7 @@
             </div>
         </div>
         <div class="header-right">
-            <div>right</div>
+            <div></div>
         </div>
     </div>
     <div class="contents">
@@ -38,6 +38,10 @@
             <p>報告された先輩たち</p>
         </div>
         <div class="">
+            <div class="hacker-gallery-search">
+                <b-form-input v-model="search" type="text" placeholder="Search" />
+                <!-- <i class="material-icons">search</i> -->
+            </div>
             <div class="hacker-gallery-body">
                 <div class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players">
                     <div class="card-body">
@@ -209,6 +213,17 @@
         width: 200px;
         margin: 10px;
     }
+    .hacker-gallery-search
+    {
+        width: 100%;
+        padding-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+    }
+    .hacker-gallery-search input
+    {
+        width: 250px;
+    }
     .form-hacker
     {
         display: flex;
@@ -225,14 +240,6 @@
         box-sizing: border-box;
         width: 70%;
         padding-left: 10px;
-    }
-    .form-hacker-select-express
-    {
-
-    }
-    .form-hacker-select-box
-    {
-
     }
     .user-select-none
     {
@@ -260,6 +267,7 @@
     {
         color: black;
         font-weight: bold;
+        width: 250px;
     }
     .report-nav-el-active
     {
@@ -280,6 +288,7 @@
     export default {
         data: function() {
             return {
+                search: "",
                 your_id: "",
                 your_email: "",
                 your_first_name: "",
@@ -328,17 +337,30 @@
             };
         },
         methods: {
-            remove: function() {
-                this.$localStorage.remove('register_id');
-                this.$localStorage.remove('register_first_name');
-                this.$localStorage.remove('register_last_name');
-                this.$localStorage.remove('register_email');
-            },
             setYou: function() {
-                this.your_id = this.$localStorage.get('register_id');
-                this.your_first_name = this.$localStorage.get('register_first_name');
-                this.your_last_name = this.$localStorage.get('register_last_name');
-                this.your_email = this.$localStorage.get('register_email');
+                let tmp = this.$localStorage.get('register_id', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_id = "";
+                else
+                    this.your_id = tmp;
+
+                tmp = this.$localStorage.get('register_first_name', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_first_name = "";
+                else
+                    this.your_first_name = tmp;
+
+                tmp = this.$localStorage.get('register_last_name', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_last_name = "";
+                else
+                    this.your_last_name = tmp;
+
+                tmp = this.$localStorage.get('register_email', null);
+                if(tmp === null ||  tmp === 'undefined')
+                    this.your_email = "";
+                else
+                    this.your_email = tmp;
             }
         },
         mounted () {
