@@ -43,7 +43,7 @@
                 <!-- <i class="material-icons">search</i> -->
             </div>
             <div class="hacker-gallery-body">
-                <div class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players">
+                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players" v-on:click="setHackerFromModal(value)">
                     <div class="card-body">
                         <h5 class="card-title">{{value}}</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -54,55 +54,35 @@
                     </div>
                 </div>
             </div>
-            <div class="report-form">
+            <div>
+            </div>
+            <b-modal size="xl" id="report-form" class="report-form" v-bind:title="hacker_id" @ok="" @shown="">
                 <form>
-                    <!-- Hacker ID -->
-                    <div class="form-hacker">
-                        <!-- Hacker 記入 -->
-                        <div class="form-hacker-fill">
-                            <label for="hacker-id">チーターのID</label>
-                            <input v-model="hacker_id" class="form-control" id="hacker-id" aria-describedby="hacker-id-help" autocomplete="on" list="hacker-players">
-                            <datalist id="hacker-players">
-                                <option v-for="(value) in hacker_players" :value="value"></option>
-                            </datalist>
-                            <small id="hacker-id-help" class="form-text text-muted">チート行為を行っていると疑われるプレイヤーのID</small>
-                        </div>
-                        <!-- Hacker 選択 -->
-                        <div class="form-hacker-select">
-                            <div class="form-hacker-select-express">
-                                報告された先輩たち
-                                <small class="text-muted">
-                                    クリックすると報告対象に追加できます
-                                </small>
-                            </div>
-                            <div class="form-hacker-select-box">
-
+                    <div class="hacker-modal">
+                        <!-- Description Select -->
+                        <div class="hacker-check-wrap">
+                            <div class="form-check-wrap form-check" v-for="(value, key) in cheating">
+                                <label class="form-check-label form-check-label-wrap user-select-none">
+                                    <input class="form-check-input" type="checkbox" value="" v-bind:id="key">
+                                    {{value}} ({{key}})
+                                    <br>
+                                    <small class="text-muted form-text">
+                                        {{cheating_description[key]}}
+                                    </small>
+                                </label>
                             </div>
                         </div>
-                    </div>
-                    <!-- Description Select -->
-                    <div class="form-check" v-for="(value, key) in cheating">
-                        <label class="form-check-label user-select-none">
-                            <input class="form-check-input" type="checkbox" value="" v-bind:id="key">
-                            {{value}} ({{key}})
-                            <br>
-                            <small class="text-muted form-text">
-                                {{cheating_description[key]}}
-                            </small>
-                        </label>
-                    </div>
-                    <!-- Description Text -->
-                    <div class="form-group">
-                        <label for="hacker-description-message">
-                            メッセージ　<small class="text-muted form-text">チート行為を選択すると自動的に入力されます</small>
-                        </label>
-                        <textarea v-model="message" class="form-control" id="hacker-description-message" :rows="message.split(/\n/).length"></textarea>
-                    </div>
-                    <div class="form-submit-wrap">
-                        <button type="submit" class="btn btn-primary form-submit">Submit</button>
+                        <div style="width: 5%"></div>
+                        <!-- Description Text -->
+                        <div class="form-group hacker-description-message-wrap">
+                            <label for="hacker-description-message">
+                                メッセージ　<small class="text-muted form-text">チート行為を選択すると自動的に入力されます</small>
+                            </label>
+                            <textarea v-model="hacker_message" class="form-control" id="hacker-description-message" :rows="hacker_message.split(/\n/).length"></textarea>
+                        </div>
                     </div>
                 </form>
-            </div>
+            </b-modal>
         </div>
     </div>
     <div class="footer">
@@ -207,11 +187,13 @@
     {
         display: flex;
         flex-wrap: wrap;
+        margin-bottom: 100px;
     }
     .hacker-gallery-body-card
     {
         width: 200px;
         margin: 10px;
+        cursor: pointer;
     }
     .hacker-gallery-search
     {
@@ -224,38 +206,39 @@
     {
         width: 250px;
     }
-    .form-hacker
-    {
-        display: flex;
-        justify-content: center;
-    }
-    .form-hacker-fill
-    {
-        box-sizing: border-box;
-        width: 30%;
-        padding-right: 10px;
-    }
-    .form-hacker-select
-    {
-        box-sizing: border-box;
-        width: 70%;
-        padding-left: 10px;
-    }
     .user-select-none
     {
         user-select: none;
     }
-    .form-submit
+    .form-check-wrap
     {
-        margin: 10px auto;
-        display: block;
-        width: 200px;
-        padding: 10px 0;
+        cursor: pointer;
+        border-radius: 5px;
+        box-sizing: border-box;
+        padding-top: 10px;
     }
-    .form-submit-wrap
+    .form-check-wrap:hover
     {
-        margin-top: 10px;
-        margin-bottom: 100px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+    .form-check-label-wrap
+    {
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    }
+    .hacker-description-message-wrap
+    {
+        width: 50%;
+    }
+    .hacker-modal
+    {
+        display: flex;
+        justify-content: center;
+    }
+    .hacker-check-wrap
+    {
+        width: 45%;
     }
     .report-nav
     {
@@ -295,6 +278,18 @@
                 your_last_name: "",
                 hacker_id: "",
                 message: "",
+                hacker_check: {
+                    "SpeedHack": false,
+                    "WallHack": false,
+                    "Chams": false,
+                    "NoRecoil": false,
+                    "AutoAim": false,
+                    "OneHitKill": false,
+                    "Macro": false,
+                    "MotionCut": false,
+                    "ESP": false
+                },
+                hacker_message: "",
                 cheating: {
                     "SpeedHack": "加速チート",
                     "WallHack": "ウォールハック",
@@ -337,6 +332,11 @@
             };
         },
         methods: {
+            setHackerFromModal(hackerId)
+            {
+                this.hacker_id = hackerId;
+                this.hacker_message += (this.hacker_id+"\n------------")
+            },
             setYou: function() {
                 let tmp = this.$localStorage.get('register_id', null);
                 if(tmp === null ||  tmp === 'undefined')

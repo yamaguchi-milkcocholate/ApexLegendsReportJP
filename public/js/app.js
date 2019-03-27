@@ -2032,23 +2032,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2059,6 +2042,18 @@ __webpack_require__.r(__webpack_exports__);
       your_last_name: "",
       hacker_id: "",
       message: "",
+      hacker_check: {
+        "SpeedHack": false,
+        "WallHack": false,
+        "Chams": false,
+        "NoRecoil": false,
+        "AutoAim": false,
+        "OneHitKill": false,
+        "Macro": false,
+        "MotionCut": false,
+        "ESP": false
+      },
+      hacker_message: "",
       cheating: {
         "SpeedHack": "加速チート",
         "WallHack": "ウォールハック",
@@ -2085,6 +2080,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    setHackerFromModal: function setHackerFromModal(hackerId) {
+      this.hacker_id = hackerId;
+      this.hacker_message += this.hacker_id + "\n------------";
+    },
     setYou: function setYou() {
       var tmp = this.$localStorage.get('register_id', null);
       if (tmp === null || tmp === 'undefined') this.your_id = "";else this.your_id = tmp;
@@ -28774,7 +28773,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    display: flex;\n    flex-wrap: wrap;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.form-hacker\n{\n    display: flex;\n    justify-content: center;\n}\n.form-hacker-fill\n{\n    box-sizing: border-box;\n    width: 30%;\n    padding-right: 10px;\n}\n.form-hacker-select\n{\n    box-sizing: border-box;\n    width: 70%;\n    padding-left: 10px;\n}\n.user-select-none\n{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-submit\n{\n    margin: 10px auto;\n    display: block;\n    width: 200px;\n    padding: 10px 0;\n}\n.form-submit-wrap\n{\n    margin-top: 10px;\n    margin-bottom: 100px;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n", ""]);
+exports.push([module.i, "\n.header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.user-select-none\n{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.form-check-label-wrap\n{\n    cursor: pointer;\n    width: 100%;\n    height: 100%;\n}\n.hacker-description-message-wrap\n{\n    width: 50%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 45%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n", ""]);
 
 // exports
 
@@ -60165,187 +60164,192 @@ var render = function() {
       _vm._v(" "),
       _vm._m(2),
       _vm._v(" "),
-      _c("div", {}, [
-        _c(
-          "div",
-          { staticClass: "hacker-gallery-search" },
-          [
-            _c("b-form-input", {
-              attrs: { type: "text", placeholder: "Search" },
-              model: {
-                value: _vm.search,
-                callback: function($$v) {
-                  _vm.search = $$v
+      _c(
+        "div",
+        {},
+        [
+          _c(
+            "div",
+            { staticClass: "hacker-gallery-search" },
+            [
+              _c("b-form-input", {
+                attrs: { type: "text", placeholder: "Search" },
+                model: {
+                  value: _vm.search,
+                  callback: function($$v) {
+                    _vm.search = $$v
+                  },
+                  expression: "search"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "hacker-gallery-body" },
+            _vm._l(_vm.hacker_players, function(value) {
+              return _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "b-modal",
+                      rawName: "v-b-modal.report-form",
+                      modifiers: { "report-form": true }
+                    }
+                  ],
+                  staticClass: "card text-center hacker-gallery-body-card",
+                  on: {
+                    click: function($event) {
+                      return _vm.setHackerFromModal(value)
+                    }
+                  }
                 },
-                expression: "search"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "hacker-gallery-body" },
-          _vm._l(_vm.hacker_players, function(value) {
-            return _c(
-              "div",
-              { staticClass: "card text-center hacker-gallery-body-card" },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title" }, [
-                    _vm._v(_vm._s(value))
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "card-text" }, [
-                    _vm._v(
-                      "With supporting text below as a natural lead-in to additional content."
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h5", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(value))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(
+                        "With supporting text below as a natural lead-in to additional content."
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      { staticClass: "btn btn-primary", attrs: { href: "#" } },
+                      [_vm._v("Go somewhere")]
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                    [_vm._v("Go somewhere")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer text-muted" }, [
-                  _vm._v(
-                    "\n                        2 days ago\n                    "
-                  )
-                ])
-              ]
-            )
-          }),
-          0
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "report-form" }, [
+                  _c("div", { staticClass: "card-footer text-muted" }, [
+                    _vm._v(
+                      "\n                        2 days ago\n                    "
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
+          ),
+          _vm._v(" "),
+          _c("div"),
+          _vm._v(" "),
           _c(
-            "form",
+            "b-modal",
+            {
+              staticClass: "report-form",
+              attrs: { size: "xl", id: "report-form", title: _vm.hacker_id },
+              on: { ok: function($event) {}, shown: function($event) {} }
+            },
             [
-              _c("div", { staticClass: "form-hacker" }, [
-                _c("div", { staticClass: "form-hacker-fill" }, [
-                  _c("label", { attrs: { for: "hacker-id" } }, [
-                    _vm._v("チーターのID")
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.hacker_id,
-                        expression: "hacker_id"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "hacker-id",
-                      "aria-describedby": "hacker-id-help",
-                      autocomplete: "on",
-                      list: "hacker-players"
-                    },
-                    domProps: { value: _vm.hacker_id },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.hacker_id = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
+              _c("form", [
+                _c("div", { staticClass: "hacker-modal" }, [
                   _c(
-                    "datalist",
-                    { attrs: { id: "hacker-players" } },
-                    _vm._l(_vm.hacker_players, function(value) {
-                      return _c("option", { domProps: { value: value } })
+                    "div",
+                    { staticClass: "hacker-check-wrap" },
+                    _vm._l(_vm.cheating, function(value, key) {
+                      return _c(
+                        "div",
+                        { staticClass: "form-check-wrap form-check" },
+                        [
+                          _c(
+                            "label",
+                            {
+                              staticClass:
+                                "form-check-label form-check-label-wrap user-select-none"
+                            },
+                            [
+                              _c("input", {
+                                staticClass: "form-check-input",
+                                attrs: { type: "checkbox", value: "", id: key }
+                              }),
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(value) +
+                                  " (" +
+                                  _vm._s(key) +
+                                  ")\n                                    "
+                              ),
+                              _c("br"),
+                              _vm._v(" "),
+                              _c(
+                                "small",
+                                { staticClass: "text-muted form-text" },
+                                [
+                                  _vm._v(
+                                    "\n                                        " +
+                                      _vm._s(_vm.cheating_description[key]) +
+                                      "\n                                    "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
                     }),
                     0
                   ),
                   _vm._v(" "),
+                  _c("div", { staticStyle: { width: "5%" } }),
+                  _vm._v(" "),
                   _c(
-                    "small",
+                    "div",
                     {
-                      staticClass: "form-text text-muted",
-                      attrs: { id: "hacker-id-help" }
+                      staticClass: "form-group hacker-description-message-wrap"
                     },
-                    [_vm._v("チート行為を行っていると疑われるプレイヤーのID")]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(3)
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.cheating, function(value, key) {
-                return _c("div", { staticClass: "form-check" }, [
-                  _c(
-                    "label",
-                    { staticClass: "form-check-label user-select-none" },
                     [
-                      _c("input", {
-                        staticClass: "form-check-input",
-                        attrs: { type: "checkbox", value: "", id: key }
-                      }),
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(value) +
-                          " (" +
-                          _vm._s(key) +
-                          ")\n                            "
+                      _c(
+                        "label",
+                        { attrs: { for: "hacker-description-message" } },
+                        [
+                          _vm._v(
+                            "\n                                メッセージ　"
+                          ),
+                          _c("small", { staticClass: "text-muted form-text" }, [
+                            _vm._v("チート行為を選択すると自動的に入力されます")
+                          ])
+                        ]
                       ),
-                      _c("br"),
                       _vm._v(" "),
-                      _c("small", { staticClass: "text-muted form-text" }, [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.cheating_description[key]) +
-                            "\n                            "
-                        )
-                      ])
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.hacker_message,
+                            expression: "hacker_message"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "hacker-description-message",
+                          rows: _vm.hacker_message.split(/\n/).length
+                        },
+                        domProps: { value: _vm.hacker_message },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.hacker_message = $event.target.value
+                          }
+                        }
+                      })
                     ]
                   )
                 ])
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(4),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.message,
-                      expression: "message"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "hacker-description-message",
-                    rows: _vm.message.split(/\n/).length
-                  },
-                  domProps: { value: _vm.message },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.message = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _vm._m(5)
-            ],
-            2
+              ])
+            ]
           )
-        ])
-      ])
+        ],
+        1
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "footer" })
@@ -60376,51 +60380,6 @@ var staticRenderFns = [
       _c("strong", [_vm._v("チーターギャラリー")]),
       _vm._v(" "),
       _c("p", [_vm._v("報告された先輩たち")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-hacker-select" }, [
-      _c("div", { staticClass: "form-hacker-select-express" }, [
-        _vm._v(
-          "\n                                報告された先輩たち\n                                "
-        ),
-        _c("small", { staticClass: "text-muted" }, [
-          _vm._v(
-            "\n                                    クリックすると報告対象に追加できます\n                                "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "form-hacker-select-box" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "hacker-description-message" } }, [
-      _vm._v("\n                            メッセージ　"),
-      _c("small", { staticClass: "text-muted form-text" }, [
-        _vm._v("チート行為を選択すると自動的に入力されます")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-submit-wrap" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary form-submit",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Submit")]
-      )
     ])
   }
 ]
