@@ -1,5 +1,20 @@
 export default {
     name: "Register",
+    computed: {
+        emailState() {
+            return this.your_email.match(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/) !== null;
+        },
+        lastNameState() {
+            return this.your_last_name.length > 0;
+        },
+        firstNameState() {
+            return true
+        },
+        idState() {
+            return true
+        },
+
+    },
     data: function() {
         return {
             your_id: "",
@@ -54,8 +69,6 @@ export default {
                 this.your_email = "";
             else
                 this.your_email = tmp;
-            console.log(tmp);
-            console.log(typeof tmp)
         },
         remove: function() {
             this.$localStorage.remove('register_id');

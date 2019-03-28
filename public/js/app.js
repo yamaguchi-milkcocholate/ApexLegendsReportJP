@@ -1851,10 +1851,22 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Register",
+  computed: {
+    emailState: function emailState() {
+      return this.your_email.match(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/) !== null;
+    },
+    lastNameState: function lastNameState() {
+      return this.your_last_name.length > 0;
+    },
+    firstNameState: function firstNameState() {
+      return true;
+    },
+    idState: function idState() {
+      return true;
+    }
+  },
   data: function data() {
     return {
       your_id: "",
@@ -1894,8 +1906,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       if (tmp === null || tmp === 'undefined') this.your_last_name = "";else this.your_last_name = tmp;
       tmp = this.$localStorage.get('register_email', null);
       if (tmp === null || tmp === 'undefined') this.your_email = "";else this.your_email = tmp;
-      console.log(tmp);
-      console.log(_typeof(tmp));
     },
     remove: function remove() {
       this.$localStorage.remove('register_id');
@@ -60123,147 +60133,171 @@ var render = function() {
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "register-form" }, [
           _c("div", { staticClass: "form-group form-column" }, [
-            _c("div", { staticClass: "form-column-child-left" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
+            _c(
+              "div",
+              { staticClass: "form-column-child-left" },
+              [
+                _c("label", { attrs: { for: "your-id" } }, [_vm._v("ID")]),
+                _vm._v(" "),
+                _c("b-form-input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "your-id",
+                    trim: "",
+                    type: "text",
+                    state: _vm.idState,
+                    "aria-describedby": "your-id-feed-back your-id-help",
+                    placeholder: ""
+                  },
+                  model: {
                     value: _vm.your_id,
+                    callback: function($$v) {
+                      _vm.your_id = $$v
+                    },
                     expression: "your_id"
                   }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "your-id", "aria-describedby": "your-id-help" },
-                domProps: { value: _vm.your_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.your_id = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("small", {
-                staticClass: "form-text text-muted",
-                attrs: { id: "your-id-help" }
-              })
-            ]),
+                }),
+                _vm._v(" "),
+                _c("b-form-invalid-feedback", {
+                  attrs: { id: "your-id-feed-back" }
+                }),
+                _vm._v(" "),
+                _c("b-form-text", { attrs: { id: "your-id-help" } }, [
+                  _vm._v("任意")
+                ])
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "form-column-child-center" }),
             _vm._v(" "),
-            _c("div", { staticClass: "form-column-child-right" }, [
-              _c("label", { attrs: { for: "your-email" } }, [
-                _vm._v("メールアドレス")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
+            _c(
+              "div",
+              { staticClass: "form-column-child-right" },
+              [
+                _c("label", { attrs: { for: "your-email" } }, [
+                  _vm._v("メールアドレス")
+                ]),
+                _vm._v(" "),
+                _c("b-form-input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "your-email",
+                    trim: "",
+                    type: "email",
+                    state: _vm.emailState,
+                    "aria-describedby": "your-email-help your-email-feed-back",
+                    placeholder: "example@example.com"
+                  },
+                  model: {
                     value: _vm.your_email,
+                    callback: function($$v) {
+                      _vm.your_email = $$v
+                    },
                     expression: "your_email"
                   }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "email",
-                  id: "your-email",
-                  "aria-describedby": "your-email-help"
-                },
-                domProps: { value: _vm.your_email },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.your_email = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("small", {
-                staticClass: "form-text text-muted",
-                attrs: { id: "your-email-help" }
-              })
-            ])
+                }),
+                _vm._v(" "),
+                _c(
+                  "b-form-invalid-feedback",
+                  { attrs: { id: "your-email-feed-back" } },
+                  [
+                    _vm._v(
+                      "\n                            必須項目\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("b-form-text", { attrs: { id: "your-email-help" } })
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group form-column" }, [
-            _c("div", { staticClass: "form-column-child-right" }, [
-              _c("label", { attrs: { for: "your-last-name" } }, [_vm._v("性")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
+            _c(
+              "div",
+              { staticClass: "form-column-child-right" },
+              [
+                _c("label", { attrs: { for: "your-last-name" } }, [
+                  _vm._v("性")
+                ]),
+                _vm._v(" "),
+                _c("b-form-input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "your-last-name",
+                    trim: "",
+                    type: "text",
+                    state: _vm.lastNameState,
+                    "aria-describedby":
+                      "your-last-name-feed-back your-last-name-help",
+                    placeholder: ""
+                  },
+                  model: {
                     value: _vm.your_last_name,
+                    callback: function($$v) {
+                      _vm.your_last_name = $$v
+                    },
                     expression: "your_last_name"
                   }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  id: "your-last-name",
-                  "aria-describedby": "your-last-name-help"
-                },
-                domProps: { value: _vm.your_last_name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.your_last_name = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("small", {
-                staticClass: "form-text text-muted",
-                attrs: { id: "your-last-name-help" }
-              })
-            ]),
+                }),
+                _vm._v(" "),
+                _c(
+                  "b-form-invalid-feedback",
+                  { attrs: { id: "your-last-name-feed-back" } },
+                  [
+                    _vm._v(
+                      "\n                            必須項目\n                        "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c("b-form-text", { attrs: { id: "your-last-name-help" } })
+              ],
+              1
+            ),
             _vm._v(" "),
             _c("div", { staticClass: "form-column-child-center" }),
             _vm._v(" "),
-            _c("div", { staticClass: "form-column-child-left" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
+            _c(
+              "div",
+              { staticClass: "form-column-child-left" },
+              [
+                _c("label", { attrs: { for: "your-first-name" } }, [
+                  _vm._v("名")
+                ]),
+                _vm._v(" "),
+                _c("b-form-input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "your-first-name",
+                    trim: "",
+                    type: "text",
+                    state: _vm.firstNameState,
+                    "aria-describedby":
+                      "your-first-name-feed-back your-first-name-help",
+                    placeholder: ""
+                  },
+                  model: {
                     value: _vm.your_first_name,
+                    callback: function($$v) {
+                      _vm.your_first_name = $$v
+                    },
                     expression: "your_first_name"
                   }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  id: "your-first-name",
-                  "aria-describedby": "your-first-name-help"
-                },
-                domProps: { value: _vm.your_first_name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.your_first_name = $event.target.value
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("small", {
-                staticClass: "form-text text-muted",
-                attrs: { id: "your-first-name-help" }
-              })
-            ])
+                }),
+                _vm._v(" "),
+                _c("b-form-invalid-feedback", {
+                  attrs: { id: "your-first-name-feed-back" }
+                }),
+                _vm._v(" "),
+                _c("b-form-text", { attrs: { id: "your-first-name-help" } }, [
+                  _vm._v("任意")
+                ])
+              ],
+              1
+            )
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-button" }, [
@@ -60312,24 +60346,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "header-right" }, [_c("div")])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "your-id" } }, [
-      _vm._v("ID "),
-      _c("small", { staticClass: "optional-notice" }, [_vm._v("[任意]")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "your-first-name" } }, [
-      _vm._v("名"),
-      _c("small", { staticClass: "optional-notice" }, [_vm._v("[任意]")])
-    ])
   }
 ]
 render._withStripped = true

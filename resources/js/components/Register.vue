@@ -39,16 +39,46 @@
                 <div class="form-group form-column">
                     <!-- ID -->
                     <div class="form-column-child-left">
-                        <label for="your-id">ID <small class="optional-notice">[任意]</small></label>
-                        <input v-model="your_id" class="form-control" id="your-id" aria-describedby="your-id-help">
-                        <small id="your-id-help" class="form-text text-muted"></small>
+                        <label for="your-id">ID</label>
+                        <b-form-input
+                            id="your-id"
+                            class="form-control"
+                            v-model="your_id"
+                            trim
+                            type="text"
+                            :state="idState"
+                            aria-describedby="your-id-feed-back your-id-help"
+                            placeholder=""
+                        />
+                        <!-- This will only be shown if the preceeding input has an invalid state -->
+                        <b-form-invalid-feedback id="your-id-feed-back">
+
+                        </b-form-invalid-feedback>
+
+                        <!-- This is a form text block (formerly known as help block) -->
+                        <b-form-text id="your-id-help">任意</b-form-text>
                     </div>
                     <div class="form-column-child-center"></div>
                     <!-- Eメール -->
                     <div class="form-column-child-right">
                         <label for="your-email">メールアドレス</label>
-                        <input v-model="your_email" type="email" class="form-control" id="your-email" aria-describedby="your-email-help">
-                        <small id="your-email-help" class="form-text text-muted"></small>
+                        <b-form-input
+                            id="your-email"
+                            class="form-control"
+                            v-model="your_email"
+                            trim
+                            type="email"
+                            :state="emailState"
+                            aria-describedby="your-email-help your-email-feed-back"
+                            placeholder="example@example.com"
+                        />
+                        <!-- This will only be shown if the preceeding input has an invalid state -->
+                        <b-form-invalid-feedback id="your-email-feed-back">
+                            必須項目
+                        </b-form-invalid-feedback>
+
+                        <!-- This is a form text block (formerly known as help block) -->
+                        <b-form-text id="your-email-help"></b-form-text>
                     </div>
                 </div>
                 <!-- 名前 -->
@@ -56,15 +86,45 @@
                     <!-- Last Name -->
                     <div class="form-column-child-right">
                         <label for="your-last-name">性</label>
-                        <input v-model="your_last_name" class="form-control" id="your-last-name" aria-describedby="your-last-name-help">
-                        <small id="your-last-name-help" class="form-text text-muted"></small>
+                        <b-form-input
+                            id="your-last-name"
+                            class="form-control"
+                            v-model="your_last_name"
+                            trim
+                            type="text"
+                            :state="lastNameState"
+                            aria-describedby="your-last-name-feed-back your-last-name-help"
+                            placeholder=""
+                        />
+                        <!-- This will only be shown if the preceeding input has an invalid state -->
+                        <b-form-invalid-feedback id="your-last-name-feed-back">
+                            必須項目
+                        </b-form-invalid-feedback>
+
+                        <!-- This is a form text block (formerly known as help block) -->
+                        <b-form-text id="your-last-name-help"></b-form-text>
                     </div>
                     <div class="form-column-child-center"></div>
                     <!-- First Name -->
                     <div class="form-column-child-left">
-                        <label for="your-first-name">名<small class="optional-notice">[任意]</small></label>
-                        <input v-model="your_first_name" class="form-control" id="your-first-name" aria-describedby="your-first-name-help">
-                        <small id="your-first-name-help" class="form-text text-muted"></small>
+                        <label for="your-first-name">名</label>
+                        <b-form-input
+                            id="your-first-name"
+                            class="form-control"
+                            v-model="your_first_name"
+                            trim
+                            type="text"
+                            :state="firstNameState"
+                            aria-describedby="your-first-name-feed-back your-first-name-help"
+                            placeholder=""
+                        />
+                        <!-- This will only be shown if the preceeding input has an invalid state -->
+                        <b-form-invalid-feedback id="your-first-name-feed-back">
+
+                        </b-form-invalid-feedback>
+
+                        <!-- This is a form text block (formerly known as help block) -->
+                        <b-form-text id="your-first-name-help">任意</b-form-text>
                     </div>
                 </div>
                 <div class="form-button">
