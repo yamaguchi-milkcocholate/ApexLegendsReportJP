@@ -43,11 +43,10 @@
                 <!-- <i class="material-icons">search</i> -->
             </div>
             <div class="hacker-gallery-body">
-                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players" v-on:click="setHackerFromModal(value)">
+                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players" v-on:click="getHackerIdFromCard(value)">
                     <div class="card-body">
                         <h5 class="card-title">{{value}}</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                     <div class="card-footer text-muted">
                         2 days ago
@@ -56,7 +55,7 @@
             </div>
             <div>
             </div>
-            <b-modal size="xl" id="report-form" class="report-form" v-bind:title="hacker_id" @ok="" @shown="">
+            <b-modal size="xl" id="report-form" class="report-form" v-bind:title="hacker_id" @ok="modalOk" @cancel="modalCancel" @shown="modalShown">
                 <form>
                     <div class="hacker-modal">
                         <!-- Description Select -->
@@ -185,6 +184,7 @@
     }
     .hacker-gallery-body
     {
+        justify-content: center;
         display: flex;
         flex-wrap: wrap;
         margin-bottom: 100px;
@@ -194,6 +194,12 @@
         width: 200px;
         margin: 10px;
         cursor: pointer;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+    }
+    .hacker-gallery-body-card:hover
+    {
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
     .hacker-gallery-search
     {
@@ -332,10 +338,8 @@
             };
         },
         methods: {
-            setHackerFromModal(hackerId)
-            {
-                this.hacker_id = hackerId;
-                this.hacker_message += (this.hacker_id+"\n------------")
+            getHackerIdFromCard: function (hackerId) {
+                this.hacker_id = hackerId
             },
             setYou: function() {
                 let tmp = this.$localStorage.get('register_id', null);
@@ -361,6 +365,16 @@
                     this.your_email = "";
                 else
                     this.your_email = tmp;
+            },
+            modalCancel: function () {
+                console.log('cancel')
+            },
+            modalOk: function () {
+                console.log('ok')
+            },
+            modalShown: function () {
+                this.hacker_message = "";
+                this.hacker_message += (this.hacker_id+"\n------------")
             }
         },
         mounted () {
