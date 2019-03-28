@@ -78,13 +78,19 @@
                                 </b-form-checkbox>
                             </b-form-group>
                         </div>
-                        <div style="width: 5%"></div>
+                        <div style="width: 5%; border-left: 1px solid rgba(0, 0, 0, 0.1)"></div>
                         <!-- Description Text -->
                         <div class="form-group hacker-description-message-wrap">
-                            <label for="hacker-description-message">
-                                メッセージ　<small class="text-muted form-text">チート行為を選択すると自動的に入力されます</small>
+                            <label class="font-alphabet">
+                                Message　<small class="text-muted form-text">チート行為を選択すると自動的に入力されます</small>
                             </label>
-                            <textarea v-model="hacker_message" class="form-control" id="hacker-description-message" :rows="hacker_message.split(/\n/).length"></textarea>
+                            <div class="box17">
+                                <p class="kaigyo font-alphabet">{{ hacker_message }}</p>
+                            </div>
+                            <label for="your-message" class="font-alphabet">
+                                自由記入　<small class="text-muted form-text"></small>
+                            </label>
+                            <textarea v-model="your_message" class="form-control" id="your-message" :rows="your_message.split(/\n/).length"></textarea>
                         </div>
                     </div>
                 </form>

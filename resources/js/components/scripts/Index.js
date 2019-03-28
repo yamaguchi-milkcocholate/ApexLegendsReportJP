@@ -1,6 +1,7 @@
 export default {
     computed: {
         selectCheckBox: function () {
+            console.log(this.hacker_message);
             this.setMessage();
             return this.hacker_check.length > 0
         }
@@ -12,8 +13,8 @@ export default {
             your_email: "",
             your_first_name: "",
             your_last_name: "",
+            your_message: "",
             hacker_id: "",
-            message: "",
             hacker_check: [],
             hacker_message: "",
             cheating : [
@@ -93,6 +94,7 @@ export default {
                 });
                 this.hacker_message += (cheat[0].text+"\n");
             }
+            this.hacker_message += ("\n"+this.your_message+"\n");
         },
         initMessage: function () {
             this.hacker_message = "";
