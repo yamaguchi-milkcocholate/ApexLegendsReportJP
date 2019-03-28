@@ -83,6 +83,7 @@ export default {
             console.log('ok')
         },
         modalShown: function () {
+            this.hacker_check = [];
             this.initMessage()
         },
         setMessage: function () {
