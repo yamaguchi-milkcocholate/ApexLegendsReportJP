@@ -76,9 +76,6 @@ export default {
             else
                 this.your_email = tmp;
         },
-        modalCancel: function () {
-            console.log('cancel')
-        },
         modalOk: function () {
             console.log('ok')
         },

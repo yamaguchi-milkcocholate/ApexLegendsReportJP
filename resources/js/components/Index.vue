@@ -55,7 +55,7 @@
             </div>
             <div>
             </div>
-            <b-modal size="xl" id="report-form" class="report-form" v-bind:title="hacker_id" @ok="modalOk" @cancel="modalCancel" @shown="modalShown">
+            <b-modal size="xl" id="report-form" class="report-form" v-bind:title="hacker_id" @ok="modalOk" @shown="modalShown">
                 <form>
                     <div class="hacker-modal">
                         <!-- Description Select -->
