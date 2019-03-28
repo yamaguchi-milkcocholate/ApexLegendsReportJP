@@ -13,17 +13,21 @@ use Illuminate\Http\Request;
 |
 */
 
+/*
 Route::group(['middleware' => 'api'], function() {
     Route::get('articles',  function() {
         $articles = Article::all()->take(5);
         return $articles;
     });
 });
+*/
 
-Route::post('/report', 'Controller@Report');
+Route::get('/v1/report', 'ReportController@Report');
 
-/*
+Route::get('/v0/report', 'ReportController@Test');
+
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-*/
+

@@ -77,7 +77,20 @@ export default {
                 this.your_email = tmp;
         },
         modalOk: function () {
-            console.log('ok')
+            console.log('ok');
+            let url = location.href + 'api/v0/report';
+            console.log(url);
+            let params = {
+                id: this.your_id,
+                email: this.your_email,
+                first_name: this.your_first_name,
+                last_name: this.your_last_name,
+                message: this.hacker_message
+            };
+            (async () => {
+                let response = await this.$axios.get(url, params);
+                console.log(response);
+            })();
         },
         modalShown: function () {
             this.hacker_check = [];
@@ -95,6 +108,7 @@ export default {
             this.hacker_message += ("\n"+this.your_message+"\n");
         },
         initMessage: function () {
+            this.your_message = "";
             this.hacker_message = "";
             this.hacker_message += (this.hacker_id+"\n------------\n")
         }

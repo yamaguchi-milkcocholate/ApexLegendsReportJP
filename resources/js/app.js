@@ -8,6 +8,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueLocalStorage from 'vue-localstorage'
 import BootstrapVue from 'bootstrap-vue'
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
