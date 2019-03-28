@@ -19,4 +19,12 @@ class ReportController extends Controller
         $json->put('success', $result);
         return $json->toJson();
     }
+
+    // Todo ReportRequest
+    public function Test(\Illuminate\Http\Request $request)
+    {
+        $json = collect();
+        $json->put('success', true);
+        return $json->toJson();
+    }
 }
