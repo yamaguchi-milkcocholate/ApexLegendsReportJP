@@ -60,16 +60,23 @@
                     <div class="hacker-modal">
                         <!-- Description Select -->
                         <div class="hacker-check-wrap">
-                            <div class="form-check-wrap form-check" v-for="(value, key) in cheating">
-                                <label class="form-check-label form-check-label-wrap user-select-none">
-                                    <input class="form-check-input" type="checkbox" value="" v-bind:id="key">
-                                    {{value}} ({{key}})
-                                    <br>
+                            <b-form-group>
+                                <b-form-invalid-feedback :state="selectCheckBox">ひとつ以上選択してください</b-form-invalid-feedback>
+                                <b-form-valid-feedback :state="selectCheckBox">Thank you!!</b-form-valid-feedback>
+                                <b-form-checkbox
+                                    class="form-check-wrap form-check"
+                                    v-for="item in cheating"
+                                    v-model="hacker_check"
+                                    :key="item.key"
+                                    :value="item.key"
+                                    :state="selectCheckBox"
+                                >
+                                    {{item.key}} ({{item.value}}) <br>
                                     <small class="text-muted form-text">
-                                        {{cheating_description[key]}}
+                                    {{item.text}}
                                     </small>
-                                </label>
-                            </div>
+                                </b-form-checkbox>
+                            </b-form-group>
                         </div>
                         <div style="width: 5%"></div>
                         <!-- Description Text -->

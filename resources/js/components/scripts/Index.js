@@ -1,4 +1,10 @@
 export default {
+    computed: {
+        selectCheckBox: function () {
+            this.setMessage();
+            return this.hacker_check.length > 0
+        }
+    },
     data: function() {
         return {
             search: "",
@@ -8,40 +14,19 @@ export default {
             your_last_name: "",
             hacker_id: "",
             message: "",
-            hacker_check: {
-                "SpeedHack": false,
-                "WallHack": false,
-                "Chams": false,
-                "NoRecoil": false,
-                "AutoAim": false,
-                "OneHitKill": false,
-                "Macro": false,
-                "MotionCut": false,
-                "ESP": false
-            },
+            hacker_check: [],
             hacker_message: "",
-            cheating: {
-                "SpeedHack": "加速チート",
-                "WallHack": "ウォールハック",
-                "Chams": "着色",
-                "NoRecoil": "無反動",
-                "AutoAim": "オートエイム",
-                "OneHitKill": "ワンヒットキル",
-                "Macro": "マクロ",
-                "MotionCut": "モーションカット",
-                "ESP": "ESP表示"
-            },
-            cheating_description:{
-                "SpeedHack": "移動速度をあげて行動できる",
-                "WallHack": "壁が透けて見える",
-                "Chams": "物体やプレイヤーに色が着いて見えやすくなる",
-                "NoRecoil": "武器の反動がない",
-                "AutoAim": "自動的にプレイヤーの頭部に照準が合う",
-                "OneHitKill": "一発の銃弾で敵を倒せる",
-                "Macro": "異常な高速タップなど不可能な動作をワンクリックで行える",
-                "MotionCut": "武器の持ち替えなどの動作をなくす",
-                "ESP": "プレイヤーの体力や距離などの情報が表示される"
-            },
+            cheating : [
+                {key: "SpeedHack", value: "加速チート", text: "移動速度をあげて行動できる"},
+                {key: "WallHack", value: "ウォールハック", text: "壁が透けて見える"},
+                {key: "Chams", value: "着色", text: "物体やプレイヤーに色が着いて見えやすくなる"},
+                {key: "NoRecoil", value: "無反動", text: "武器の反動がない"},
+                {key: "AutoAim", value: "オートエイム", text: "自動的にプレイヤーの頭部に照準が合う"},
+                {key: "OneHitKill", value: "ワンヒットキル", text: "一発の銃弾で敵を倒せる"},
+                {key: "Macro", value: "マクロ", text: "異常な高速タップなど不可能な動作をワンクリックで行える"},
+                {key: "MotionCut", value: "モーションカット", text: "武器の持ち替えなどの動作をなくす"},
+                {key: "ESP", value: "ESP表示", text: "プレイヤーの体力や距離などの情報が表示される"},
+            ],
             hacker_players:[
                 'hacker-1',
                 'hacker-2',
@@ -97,8 +82,21 @@ export default {
             console.log('ok')
         },
         modalShown: function () {
+            this.initMessage()
+        },
+        setMessage: function () {
+            this.initMessage();
+            for(let i=0; i<this.hacker_check.length; i++) {
+                let select = this.hacker_check[i];
+                let cheat = this.cheating.filter((item) => {
+                    return item.key === select
+                });
+                this.hacker_message += (cheat[0].text+"\n");
+            }
+        },
+        initMessage: function () {
             this.hacker_message = "";
-            this.hacker_message += (this.hacker_id+"\n------------")
+            this.hacker_message += (this.hacker_id+"\n------------\n")
         }
     },
     mounted () {

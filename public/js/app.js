@@ -1764,6 +1764,12 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
+  computed: {
+    selectCheckBox: function selectCheckBox() {
+      this.setMessage();
+      return this.hacker_check.length > 0;
+    }
+  },
   data: function data() {
     return {
       search: "",
@@ -1773,40 +1779,45 @@ __webpack_require__.r(__webpack_exports__);
       your_last_name: "",
       hacker_id: "",
       message: "",
-      hacker_check: {
-        "SpeedHack": false,
-        "WallHack": false,
-        "Chams": false,
-        "NoRecoil": false,
-        "AutoAim": false,
-        "OneHitKill": false,
-        "Macro": false,
-        "MotionCut": false,
-        "ESP": false
-      },
+      hacker_check: [],
       hacker_message: "",
-      cheating: {
-        "SpeedHack": "加速チート",
-        "WallHack": "ウォールハック",
-        "Chams": "着色",
-        "NoRecoil": "無反動",
-        "AutoAim": "オートエイム",
-        "OneHitKill": "ワンヒットキル",
-        "Macro": "マクロ",
-        "MotionCut": "モーションカット",
-        "ESP": "ESP表示"
-      },
-      cheating_description: {
-        "SpeedHack": "移動速度をあげて行動できる",
-        "WallHack": "壁が透けて見える",
-        "Chams": "物体やプレイヤーに色が着いて見えやすくなる",
-        "NoRecoil": "武器の反動がない",
-        "AutoAim": "自動的にプレイヤーの頭部に照準が合う",
-        "OneHitKill": "一発の銃弾で敵を倒せる",
-        "Macro": "異常な高速タップなど不可能な動作をワンクリックで行える",
-        "MotionCut": "武器の持ち替えなどの動作をなくす",
-        "ESP": "プレイヤーの体力や距離などの情報が表示される"
-      },
+      cheating: [{
+        key: "SpeedHack",
+        value: "加速チート",
+        text: "移動速度をあげて行動できる"
+      }, {
+        key: "WallHack",
+        value: "ウォールハック",
+        text: "壁が透けて見える"
+      }, {
+        key: "Chams",
+        value: "着色",
+        text: "物体やプレイヤーに色が着いて見えやすくなる"
+      }, {
+        key: "NoRecoil",
+        value: "無反動",
+        text: "武器の反動がない"
+      }, {
+        key: "AutoAim",
+        value: "オートエイム",
+        text: "自動的にプレイヤーの頭部に照準が合う"
+      }, {
+        key: "OneHitKill",
+        value: "ワンヒットキル",
+        text: "一発の銃弾で敵を倒せる"
+      }, {
+        key: "Macro",
+        value: "マクロ",
+        text: "異常な高速タップなど不可能な動作をワンクリックで行える"
+      }, {
+        key: "MotionCut",
+        value: "モーションカット",
+        text: "武器の持ち替えなどの動作をなくす"
+      }, {
+        key: "ESP",
+        value: "ESP表示",
+        text: "プレイヤーの体力や距離などの情報が表示される"
+      }],
       hacker_players: ['hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3']
     };
   },
@@ -1831,8 +1842,30 @@ __webpack_require__.r(__webpack_exports__);
       console.log('ok');
     },
     modalShown: function modalShown() {
+      this.initMessage();
+    },
+    setMessage: function setMessage() {
+      var _this = this;
+
+      this.initMessage();
+
+      var _loop = function _loop(i) {
+        var select = _this.hacker_check[i];
+
+        var cheat = _this.cheating.filter(function (item) {
+          return item.key === select;
+        });
+
+        _this.hacker_message += cheat[0].text + "\n";
+      };
+
+      for (var i = 0; i < this.hacker_check.length; i++) {
+        _loop(i);
+      }
+    },
+    initMessage: function initMessage() {
       this.hacker_message = "";
-      this.hacker_message += this.hacker_id + "\n------------";
+      this.hacker_message += this.hacker_id + "\n------------\n";
     }
   },
   mounted: function mounted() {
@@ -28438,7 +28471,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.user-select-none\n{\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.form-check-label-wrap\n{\n    cursor: pointer;\n    width: 100%;\n    height: 100%;\n}\n.hacker-description-message-wrap\n{\n    width: 50%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 45%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n", ""]);
+exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.hacker-description-message-wrap\n{\n    width: 50%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 45%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n", ""]);
 
 // exports
 
@@ -59915,48 +59948,69 @@ var render = function() {
                   _c(
                     "div",
                     { staticClass: "hacker-check-wrap" },
-                    _vm._l(_vm.cheating, function(value, key) {
-                      return _c(
-                        "div",
-                        { staticClass: "form-check-wrap form-check" },
+                    [
+                      _c(
+                        "b-form-group",
                         [
                           _c(
-                            "label",
-                            {
-                              staticClass:
-                                "form-check-label form-check-label-wrap user-select-none"
-                            },
-                            [
-                              _c("input", {
-                                staticClass: "form-check-input",
-                                attrs: { type: "checkbox", value: "", id: key }
-                              }),
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(value) +
-                                  " (" +
-                                  _vm._s(key) +
-                                  ")\n                                    "
-                              ),
-                              _c("br"),
-                              _vm._v(" "),
-                              _c(
-                                "small",
-                                { staticClass: "text-muted form-text" },
-                                [
-                                  _vm._v(
-                                    "\n                                        " +
-                                      _vm._s(_vm.cheating_description[key]) +
-                                      "\n                                    "
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ]
+                            "b-form-invalid-feedback",
+                            { attrs: { state: _vm.selectCheckBox } },
+                            [_vm._v("ひとつ以上選択してください")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "b-form-valid-feedback",
+                            { attrs: { state: _vm.selectCheckBox } },
+                            [_vm._v("Thank you!!")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.cheating, function(item) {
+                            return _c(
+                              "b-form-checkbox",
+                              {
+                                key: item.key,
+                                staticClass: "form-check-wrap form-check",
+                                attrs: {
+                                  value: item.key,
+                                  state: _vm.selectCheckBox
+                                },
+                                model: {
+                                  value: _vm.hacker_check,
+                                  callback: function($$v) {
+                                    _vm.hacker_check = $$v
+                                  },
+                                  expression: "hacker_check"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(item.key) +
+                                    " (" +
+                                    _vm._s(item.value) +
+                                    ") "
+                                ),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c(
+                                  "small",
+                                  { staticClass: "text-muted form-text" },
+                                  [
+                                    _vm._v(
+                                      "\n                                    " +
+                                        _vm._s(item.text) +
+                                        "\n                                    "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
                       )
-                    }),
-                    0
+                    ],
+                    1
                   ),
                   _vm._v(" "),
                   _c("div", { staticStyle: { width: "5%" } }),
