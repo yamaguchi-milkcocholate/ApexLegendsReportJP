@@ -1,7 +1,6 @@
 export default {
     computed: {
         selectCheckBox: function () {
-            console.log(this.hacker_message);
             this.setMessage();
             return this.hacker_check.length > 0
         }
@@ -45,6 +44,8 @@ export default {
                 'hacker-2',
                 'hacker-3',
             ],
+            dismissCountDown: 0,
+            alertMessage: "",
         };
     },
     methods: {
@@ -77,20 +78,35 @@ export default {
                 this.your_email = tmp;
         },
         modalOk: function () {
-            console.log('ok');
             let url = location.href + 'api/v0/report';
-            console.log(url);
             let params = {
                 id: this.your_id,
                 email: this.your_email,
                 first_name: this.your_first_name,
                 last_name: this.your_last_name,
+                hacker_id: this.hacker_id,
                 message: this.hacker_message
             };
-            (async () => {
-                let response = await this.$axios.get(url, params);
-                console.log(response);
-            })();
+            let showAlert = this.showAlert;
+            this.$axios.post(url, params)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        console.log(response.data);
+                    }
+                    else {
+                        showAlert('Unknown Error');
+                        console.log('Unknown Error');
+                        console.log(response)
+                    }
+                })
+                .catch(function (error) {
+                    if(error.response) {
+                        if(error.response.status === 422) {
+                            showAlert('入力内容に誤りがあります');
+                            console.log('入力内容に誤りがあります');
+                        }
+                    }
+                });
         },
         modalShown: function () {
             this.hacker_check = [];
@@ -111,6 +127,13 @@ export default {
             this.your_message = "";
             this.hacker_message = "";
             this.hacker_message += (this.hacker_id+"\n------------\n")
+        },
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        showAlert(message) {
+            this.dismissCountDown = 7;
+            this.alertMessage = message
         }
     },
     mounted () {

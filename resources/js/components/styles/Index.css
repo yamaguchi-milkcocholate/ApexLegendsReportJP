@@ -200,4 +200,13 @@
 {
     font-family: 'Vollkorn', serif;
 }
+.alert-area
+{
+    position: fixed;
+    top: 70px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    z-index: 1000;
+}
 

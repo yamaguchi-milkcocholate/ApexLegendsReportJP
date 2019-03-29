@@ -32,6 +32,7 @@ require('./bootstrap');
 Vue.use(VueRouter);
 Vue.use(VueLocalStorage);
 Vue.use(BootstrapVue);
+Vue.prototype.$axios = axios; // この行を追加
 
 const router = new VueRouter({
     mode: 'history',

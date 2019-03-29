@@ -99,6 +99,17 @@
     </div>
     <div class="footer">
     </div>
+    <div class="alert-area">
+        <b-alert
+            :show="dismissCountDown"
+            dismissible
+            variant="danger"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+        >
+            <p>{{ alertMessage }}</p>
+        </b-alert>
+    </div>
 </div>
 </template>
 <style src="./styles/Index.css"></style>
