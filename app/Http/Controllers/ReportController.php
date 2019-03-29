@@ -20,11 +20,12 @@ class ReportController extends Controller
         return $json->toJson();
     }
 
-    // Todo ReportRequest
-    public function Test(\Illuminate\Http\Request $request)
+    public function Test(ReportRequest $request)
     {
+        $validated = $request->validated();
         $json = collect();
         $json->put('success', true);
+        $json->put('data', $validated);
         return $json->toJson();
     }
 }

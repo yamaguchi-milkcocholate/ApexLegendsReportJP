@@ -24,11 +24,12 @@ class ReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'your-id' => '',
-            'your-first-name' => 'required',
-            'your-last-name' => '',
-            'your-email' => 'required|email',
-            'hacker-id' => 'required',
+            'id' => '',
+            'first_name' => 'required',
+            'last_name' => '',
+            'email' => 'required|email',
+            'hacker_id' => 'required',
+            'message' => 'required',
         ];
     }
 

@@ -22,9 +22,9 @@ Route::group(['middleware' => 'api'], function() {
 });
 */
 
-Route::get('/v1/report', 'ReportController@Report');
+Route::post('/v1/report', 'ReportController@Report');
 
-Route::get('/v0/report', 'ReportController@Test');
+Route::post('/v0/report', 'ReportController@Test');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
