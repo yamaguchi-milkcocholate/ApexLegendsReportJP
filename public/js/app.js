@@ -1866,6 +1866,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     modalShown: function modalShown() {
+      this.your_message = "";
       this.hacker_check = [];
       this.initMessage();
     },
@@ -1881,7 +1882,7 @@ __webpack_require__.r(__webpack_exports__);
           return item.key === select;
         });
 
-        _this.hacker_message += cheat[0].text + "\n";
+        _this.hacker_message += "・" + cheat[0].key + "\n";
       };
 
       for (var i = 0; i < this.hacker_check.length; i++) {
@@ -1891,9 +1892,7 @@ __webpack_require__.r(__webpack_exports__);
       this.hacker_message += "\n" + this.your_message + "\n";
     },
     initMessage: function initMessage() {
-      this.your_message = "";
-      this.hacker_message = "";
-      this.hacker_message += this.hacker_id + "\n------------\n";
+      this.hacker_message = "" + "The following player is supposed to cheat. Please investigate.\n" + "ID: " + this.hacker_id + "\n" + "Cheat: \n";
     },
     countDownChanged: function countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;

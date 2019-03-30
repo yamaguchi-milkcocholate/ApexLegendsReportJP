@@ -109,6 +109,7 @@ export default {
                 });
         },
         modalShown: function () {
+            this.your_message = "";
             this.hacker_check = [];
             this.initMessage()
         },
@@ -119,14 +120,15 @@ export default {
                 let cheat = this.cheating.filter((item) => {
                     return item.key === select
                 });
-                this.hacker_message += (cheat[0].text+"\n");
+                this.hacker_message += ("・"+cheat[0].key+"\n");
             }
             this.hacker_message += ("\n"+this.your_message+"\n");
         },
         initMessage: function () {
-            this.your_message = "";
-            this.hacker_message = "";
-            this.hacker_message += (this.hacker_id+"\n------------\n")
+            this.hacker_message = "" +
+                "The following player is supposed to cheat. Please investigate.\n" +
+                "ID: "+this.hacker_id+"\n" +
+                "Cheat: \n";
         },
         countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
