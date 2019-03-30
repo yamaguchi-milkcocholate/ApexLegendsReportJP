@@ -39,11 +39,11 @@
         </div>
         <div class="">
             <div class="hacker-gallery-search">
-                <b-form-input v-model="search" type="text" placeholder="Search" />
+                <b-form-input v-model="search" type="text" placeholder="Search"/>
                 <!-- <i class="material-icons">search</i> -->
             </div>
             <div class="hacker-gallery-body">
-                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in hacker_players" v-on:click="getHackerIdFromCard(value)">
+                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in selected_hacker_players" v-on:click="getHackerIdFromCard(value)">
                     <div class="card-body">
                         <h5 class="card-title">{{value}}</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>

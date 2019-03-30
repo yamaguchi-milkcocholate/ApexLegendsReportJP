@@ -1818,12 +1818,25 @@ __webpack_require__.r(__webpack_exports__);
         value: "ESP表示",
         text: "プレイヤーの体力や距離などの情報が表示される"
       }],
+      selected_hacker_players: [],
       hacker_players: ['hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3'],
       dismissCountDown: 0,
       alertMessage: "",
       dismissSecs: 3,
       alertType: "danger"
     };
+  },
+  watch: {
+    search: function search() {
+      if (this.search === "") {
+        this.selected_hacker_players = this.hacker_players;
+      } else {
+        var target = this.search;
+        this.selected_hacker_players = this.hacker_players.filter(function (item) {
+          return item.match(target);
+        });
+      }
+    }
   },
   methods: {
     getHackerIdFromCard: function getHackerIdFromCard(hackerId) {
@@ -1908,6 +1921,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.setYou();
+    this.selected_hacker_players = this.hacker_players;
   }
 });
 
@@ -59944,7 +59958,7 @@ var render = function() {
           _c(
             "div",
             { staticClass: "hacker-gallery-body" },
-            _vm._l(_vm.hacker_players, function(value) {
+            _vm._l(_vm.selected_hacker_players, function(value) {
               return _c(
                 "div",
                 {

@@ -27,6 +27,7 @@ export default {
                 {key: "MotionCut", value: "モーションカット", text: "武器の持ち替えなどの動作をなくす"},
                 {key: "ESP", value: "ESP表示", text: "プレイヤーの体力や距離などの情報が表示される"},
             ],
+            selected_hacker_players: [],
             hacker_players:[
                 'hacker-1',
                 'hacker-2',
@@ -49,6 +50,19 @@ export default {
             dismissSecs: 3,
             alertType: "danger",
         };
+    },
+    watch: {
+        search: function() {
+            if(this.search === "") {
+                this.selected_hacker_players = this.hacker_players
+            }
+            else {
+                let target = this.search;
+                this.selected_hacker_players = this.hacker_players.filter((item) => {
+                    return item.match(target);
+                });
+            }
+        },
     },
     methods: {
         getHackerIdFromCard: function (hackerId) {
@@ -144,5 +158,6 @@ export default {
     },
     mounted () {
         this.setYou();
+        this.selected_hacker_players = this.hacker_players
     }
 };
