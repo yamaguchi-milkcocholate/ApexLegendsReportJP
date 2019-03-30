@@ -140,6 +140,24 @@
     </div>
     <div class="footer">
     </div>
+    <div class="alert-area">
+        <b-alert
+            class="alert-body"
+            :show="dismissCountDown"
+            dismissible
+            :variant="alertType"
+            @dismissed="dismissCountDown=0"
+            @dismiss-count-down="countDownChanged"
+        >
+            <p>{{ alertMessage }}</p>
+            <b-progress
+                :variant="alertType"
+                :max="dismissSecs"
+                :value="dismissCountDown"
+                height="4px"
+            ></b-progress>
+        </b-alert>
+    </div>
 </div>
 </template>
 <style src="./styles/Register.css"></style>

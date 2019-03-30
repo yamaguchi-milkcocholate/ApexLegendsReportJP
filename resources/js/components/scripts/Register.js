@@ -21,6 +21,10 @@ export default {
             your_email: "",
             your_first_name: "",
             your_last_name: "",
+            dismissCountDown: 0,
+            alertMessage: "",
+            dismissSecs: 3,
+            alertType: 'danger',
         }
     },
     localStorage: {
@@ -39,11 +43,18 @@ export default {
     },
     methods: {
         register: function() {
-            this.$localStorage.set('register_id', this.your_id);
-            this.$localStorage.set('register_first_name', this.your_first_name);
-            this.$localStorage.set('register_last_name', this.your_last_name);
-            this.$localStorage.set('register_email', this.your_email);
-            this.setYou();
+            if(this.emailState && this.lastNameState && this.firstNameState && this.idState) {
+                this.$localStorage.set('register_id', this.your_id);
+                this.$localStorage.set('register_first_name', this.your_first_name);
+                this.$localStorage.set('register_last_name', this.your_last_name);
+                this.$localStorage.set('register_email', this.your_email);
+                this.setYou();
+                console.log('hoge');
+                this.showAlert('登録しました!!', 'success')
+            }
+            else {
+                this.showAlert('入力内容に誤りがあります!!', 'danger')
+            }
         },
         setYou: function() {
             let tmp = this.$localStorage.get('register_id', null);
@@ -79,6 +90,15 @@ export default {
             this.your_first_name = "";
             this.your_last_name = "";
             this.your_email = "";
+            this.showAlert('削除しました!!', 'success')
+        },
+        countDownChanged(dismissCountDown) {
+            this.dismissCountDown = dismissCountDown
+        },
+        showAlert(message, alertType) {
+            this.alertType = alertType;
+            this.dismissCountDown = this.dismissSecs;
+            this.alertMessage = message
         }
     },
     mounted () {

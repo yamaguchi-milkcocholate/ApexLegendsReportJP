@@ -209,4 +209,9 @@
     justify-content: center;
     z-index: 1000;
 }
+.alert-body
+{
+    width: 100%;
+    min-height: 100px;
+}
 

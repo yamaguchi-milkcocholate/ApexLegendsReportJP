@@ -1820,7 +1820,9 @@ __webpack_require__.r(__webpack_exports__);
       }],
       hacker_players: ['hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3'],
       dismissCountDown: 0,
-      alertMessage: ""
+      alertMessage: "",
+      dismissSecs: 3,
+      alertType: "danger"
     };
   },
   methods: {
@@ -1850,17 +1852,18 @@ __webpack_require__.r(__webpack_exports__);
       var showAlert = this.showAlert;
       this.$axios.post(url, params).then(function (response) {
         if (response.status === 200) {
+          showAlert('報告完了しました!!', 'success');
           console.log(response.data);
         } else {
-          showAlert('Unknown Error');
+          showAlert('Unknown Error', 'danger');
           console.log('Unknown Error');
           console.log(response);
         }
       }).catch(function (error) {
         if (error.response) {
           if (error.response.status === 422) {
-            showAlert('入力内容に誤りがあります');
-            console.log('入力内容に誤りがあります');
+            showAlert('入力内容に誤りがあります!!', 'danger');
+            console.log('入力内容に誤りがあります!!');
           }
         }
       });
@@ -1897,8 +1900,9 @@ __webpack_require__.r(__webpack_exports__);
     countDownChanged: function countDownChanged(dismissCountDown) {
       this.dismissCountDown = dismissCountDown;
     },
-    showAlert: function showAlert(message) {
-      this.dismissCountDown = 7;
+    showAlert: function showAlert(message, alertType) {
+      this.alertType = alertType;
+      this.dismissCountDown = this.dismissSecs;
       this.alertMessage = message;
     }
   },
@@ -1939,7 +1943,11 @@ __webpack_require__.r(__webpack_exports__);
       your_id: "",
       your_email: "",
       your_first_name: "",
-      your_last_name: ""
+      your_last_name: "",
+      dismissCountDown: 0,
+      alertMessage: "",
+      dismissSecs: 3,
+      alertType: 'danger'
     };
   },
   localStorage: {
@@ -1958,11 +1966,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
-      this.$localStorage.set('register_id', this.your_id);
-      this.$localStorage.set('register_first_name', this.your_first_name);
-      this.$localStorage.set('register_last_name', this.your_last_name);
-      this.$localStorage.set('register_email', this.your_email);
-      this.setYou();
+      if (this.emailState && this.lastNameState && this.firstNameState && this.idState) {
+        this.$localStorage.set('register_id', this.your_id);
+        this.$localStorage.set('register_first_name', this.your_first_name);
+        this.$localStorage.set('register_last_name', this.your_last_name);
+        this.$localStorage.set('register_email', this.your_email);
+        this.setYou();
+        console.log('hoge');
+        this.showAlert('登録しました!!', 'success');
+      } else {
+        this.showAlert('入力内容に誤りがあります!!', 'danger');
+      }
     },
     setYou: function setYou() {
       var tmp = this.$localStorage.get('register_id', null);
@@ -1983,6 +1997,15 @@ __webpack_require__.r(__webpack_exports__);
       this.your_first_name = "";
       this.your_last_name = "";
       this.your_email = "";
+      this.showAlert('削除しました!!', 'success');
+    },
+    countDownChanged: function countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert: function showAlert(message, alertType) {
+      this.alertType = alertType;
+      this.dismissCountDown = this.dismissSecs;
+      this.alertMessage = message;
     }
   },
   mounted: function mounted() {
@@ -28505,7 +28528,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.hacker-description-message-wrap\n{\n    width: 60%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 35%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n.kaigyo {\n    white-space: pre-wrap;\n    word-wrap: break-word;\n}\n.box17{\n    margin:2em 0;\n    position: relative;\n    padding: 0.5em 1.5em;\n    border-top: solid 2px black;\n    border-bottom: solid 2px black;\n}\n.box17:before, .box17:after{\n    content: '';\n    position: absolute;\n    top: -10px;\n    width: 2px;\n    height: calc(100% + 20px);\n    background-color: black;\n}\n.box17:before {left: 10px;}\n.box17:after {right: 10px;}\n.box17 p {\n    margin: 0;\n    padding: 0;\n}\n.font-alphabet\n{\n    font-family: 'Vollkorn', serif;\n}\n.alert-area\n{\n    position: fixed;\n    top: 70px;\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    z-index: 1000;\n}\n\n", ""]);
+exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.hacker-description-message-wrap\n{\n    width: 60%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 35%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n.kaigyo {\n    white-space: pre-wrap;\n    word-wrap: break-word;\n}\n.box17{\n    margin:2em 0;\n    position: relative;\n    padding: 0.5em 1.5em;\n    border-top: solid 2px black;\n    border-bottom: solid 2px black;\n}\n.box17:before, .box17:after{\n    content: '';\n    position: absolute;\n    top: -10px;\n    width: 2px;\n    height: calc(100% + 20px);\n    background-color: black;\n}\n.box17:before {left: 10px;}\n.box17:after {right: 10px;}\n.box17 p {\n    margin: 0;\n    padding: 0;\n}\n.font-alphabet\n{\n    font-family: 'Vollkorn', serif;\n}\n.alert-area\n{\n    position: fixed;\n    top: 70px;\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    z-index: 1000;\n}\n.alert-body\n{\n    width: 100%;\n    min-height: 100px;\n}\n\n", ""]);
 
 // exports
 
@@ -28525,7 +28548,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.form-column\n{\n    display: flex;\n    justify-content: center;\n}\n.form-column-child-right\n{\n    width: 45%;\n}\n.form-column-child-center\n{\n    width: 10%;\n}\n.form-column-child-left\n{\n    width: 45%;\n}\n#your-first-name, #your-last-name\n{\n    display: inline;\n}\n.optional-notice\n{\n}\n.form-button-submit, .form-button-remove\n{\n    box-sizing: border-box;\n    padding: 10px 80px;\n    margin: 20px 40px;\n    font-weight: bold;\n}\n.form-button\n{\n    margin-top: 10px;\n    margin-bottom: 100px;\n    display: flex;\n    justify-content: center;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n", ""]);
+exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.form-column\n{\n    display: flex;\n    justify-content: center;\n}\n.form-column-child-right\n{\n    width: 45%;\n}\n.form-column-child-center\n{\n    width: 10%;\n}\n.form-column-child-left\n{\n    width: 45%;\n}\n#your-first-name, #your-last-name\n{\n    display: inline;\n}\n.optional-notice\n{\n}\n.form-button-submit, .form-button-remove\n{\n    box-sizing: border-box;\n    padding: 10px 80px;\n    margin: 20px 40px;\n    font-weight: bold;\n}\n.form-button\n{\n    margin-top: 10px;\n    margin-bottom: 100px;\n    display: flex;\n    justify-content: center;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n.alert-area\n{\n    position: fixed;\n    top: 70px;\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    z-index: 1000;\n}\n.alert-body\n{\n    width: 100%;\n    min-height: 100px;\n}\n", ""]);
 
 // exports
 
@@ -60127,10 +60150,11 @@ var render = function() {
         _c(
           "b-alert",
           {
+            staticClass: "alert-body",
             attrs: {
               show: _vm.dismissCountDown,
               dismissible: "",
-              variant: "danger"
+              variant: _vm.alertType
             },
             on: {
               dismissed: function($event) {
@@ -60139,7 +60163,19 @@ var render = function() {
               "dismiss-count-down": _vm.countDownChanged
             }
           },
-          [_c("p", [_vm._v(_vm._s(_vm.alertMessage))])]
+          [
+            _c("p", [_vm._v(_vm._s(_vm.alertMessage))]),
+            _vm._v(" "),
+            _c("b-progress", {
+              attrs: {
+                variant: _vm.alertType,
+                max: _vm.dismissSecs,
+                value: _vm.dismissCountDown,
+                height: "4px"
+              }
+            })
+          ],
+          1
         )
       ],
       1
@@ -60455,7 +60491,45 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "footer" })
+    _c("div", { staticClass: "footer" }),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "alert-area" },
+      [
+        _c(
+          "b-alert",
+          {
+            staticClass: "alert-body",
+            attrs: {
+              show: _vm.dismissCountDown,
+              dismissible: "",
+              variant: _vm.alertType
+            },
+            on: {
+              dismissed: function($event) {
+                _vm.dismissCountDown = 0
+              },
+              "dismiss-count-down": _vm.countDownChanged
+            }
+          },
+          [
+            _c("p", [_vm._v(_vm._s(_vm.alertMessage))]),
+            _vm._v(" "),
+            _c("b-progress", {
+              attrs: {
+                variant: _vm.alertType,
+                max: _vm.dismissSecs,
+                value: _vm.dismissCountDown,
+                height: "4px"
+              }
+            })
+          ],
+          1
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [

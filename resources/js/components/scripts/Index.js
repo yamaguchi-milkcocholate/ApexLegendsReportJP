@@ -46,6 +46,8 @@ export default {
             ],
             dismissCountDown: 0,
             alertMessage: "",
+            dismissSecs: 3,
+            alertType: "danger",
         };
     },
     methods: {
@@ -91,10 +93,11 @@ export default {
             this.$axios.post(url, params)
                 .then(function (response) {
                     if (response.status === 200) {
+                        showAlert('報告完了しました!!', 'success');
                         console.log(response.data);
                     }
                     else {
-                        showAlert('Unknown Error');
+                        showAlert('Unknown Error', 'danger');
                         console.log('Unknown Error');
                         console.log(response)
                     }
@@ -102,8 +105,8 @@ export default {
                 .catch(function (error) {
                     if(error.response) {
                         if(error.response.status === 422) {
-                            showAlert('入力内容に誤りがあります');
-                            console.log('入力内容に誤りがあります');
+                            showAlert('入力内容に誤りがあります!!', 'danger');
+                            console.log('入力内容に誤りがあります!!');
                         }
                     }
                 });
@@ -133,8 +136,9 @@ export default {
         countDownChanged(dismissCountDown) {
             this.dismissCountDown = dismissCountDown
         },
-        showAlert(message) {
-            this.dismissCountDown = 7;
+        showAlert(message, alertType) {
+            this.alertType = alertType;
+            this.dismissCountDown = this.dismissSecs;
             this.alertMessage = message
         }
     },
