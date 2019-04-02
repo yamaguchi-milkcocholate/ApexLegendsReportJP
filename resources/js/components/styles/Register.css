@@ -105,7 +105,7 @@
 .form-button
 {
     margin-top: 10px;
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
 }
@@ -120,6 +120,7 @@
     color: black;
     font-weight: bold;
     width: 250px;
+    text-align: center;
 }
 .report-nav-el-active
 {
@@ -147,4 +148,28 @@
 {
     width: 100%;
     min-height: 100px;
+}
+.box26 {
+    max-width: 500px;
+    position: relative;
+    margin: 2em auto;
+    padding: 0.5em 1em;
+    border: solid 2px #5D627B;
+    border-radius: 6px;
+}
+.box26 .box-title {
+    position: absolute;
+    display: inline-block;
+    top: -13px;
+    left: 10px;
+    padding: 0 9px;
+    line-height: 1;
+    font-size: 15px;
+    background: #FFF;
+    color: #5D627B;
+    font-weight: normal;
+}
+.box26 p {
+    margin: 0;
+    padding: 0;
 }

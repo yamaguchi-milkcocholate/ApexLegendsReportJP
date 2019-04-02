@@ -16,7 +16,7 @@
                 {{your_first_name}} {{your_last_name}}
             </div>
             <div class="register-email register-info">
-                <small class="register-title">E-メール</small><br>
+                <small class="register-title">メール</small><br>
                 {{your_email}}
             </div>
         </div>
@@ -31,6 +31,7 @@
             <div class="nav report-nav">
                 <router-link class="nav-link report-nav-el" to="/">チーターギャラリー</router-link>
                 <router-link class="nav-link report-nav-el report-nav-el-active active" to="/register">登録</router-link>
+                <router-link class="nav-link report-nav-el" to="/about">サイトについて</router-link>
             </div>
         </div>
         <div class="container">
@@ -72,12 +73,9 @@
                             aria-describedby="your-email-help your-email-feed-back"
                             placeholder="example@example.com"
                         />
-                        <!-- This will only be shown if the preceeding input has an invalid state -->
                         <b-form-invalid-feedback id="your-email-feed-back">
                             必須項目
                         </b-form-invalid-feedback>
-
-                        <!-- This is a form text block (formerly known as help block) -->
                         <b-form-text id="your-email-help"></b-form-text>
                     </div>
                 </div>
@@ -96,13 +94,10 @@
                             aria-describedby="your-last-name-feed-back your-last-name-help"
                             placeholder=""
                         />
-                        <!-- This will only be shown if the preceeding input has an invalid state -->
                         <b-form-invalid-feedback id="your-last-name-feed-back">
-                            必須項目
                         </b-form-invalid-feedback>
 
-                        <!-- This is a form text block (formerly known as help block) -->
-                        <b-form-text id="your-last-name-help"></b-form-text>
+                        <b-form-text id="your-last-name-help">任意</b-form-text>
                     </div>
                     <div class="form-column-child-center"></div>
                     <!-- First Name -->
@@ -118,13 +113,11 @@
                             aria-describedby="your-first-name-feed-back your-first-name-help"
                             placeholder=""
                         />
-                        <!-- This will only be shown if the preceeding input has an invalid state -->
                         <b-form-invalid-feedback id="your-first-name-feed-back">
-
+                            必須項目
                         </b-form-invalid-feedback>
 
-                        <!-- This is a form text block (formerly known as help block) -->
-                        <b-form-text id="your-first-name-help">任意</b-form-text>
+                        <b-form-text id="your-first-name-help"></b-form-text>
                     </div>
                 </div>
                 <div class="form-button">
@@ -133,6 +126,12 @@
                     </div>
                     <div>
                         <button v-on:click="remove" class="btn btn-outline-danger form-button-remove">削除</button>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="box26">
+                        <span class="box-title">通知</span>
+                        <p>登録された情報は、お使いのブラウザーにのみ保存されます。<br>削除ボタンから保存情報を削除できます</p>
                     </div>
                 </div>
             </div>
