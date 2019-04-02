@@ -82,12 +82,10 @@
 }
 .hacker-gallery-head strong
 {
-    font-family: "游教科書体 横用","YuKyokasho Yoko"; font-weight: bold;
     font-size: 40px;
 }
 .hacker-gallery-head p
 {
-    font-family: "游教科書体 横用","YuKyokasho Yoko"; font-weight: bold;
     font-size: 20px;
 }
 .hacker-gallery-body
@@ -108,17 +106,6 @@
 .hacker-gallery-body-card:hover
 {
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-.hacker-gallery-search
-{
-    width: 100%;
-    padding-right: 10px;
-    display: flex;
-    justify-content: flex-end;
-}
-.hacker-gallery-search input
-{
-    width: 250px;
 }
 .form-check-wrap
 {
@@ -214,4 +201,33 @@
     width: 100%;
     min-height: 100px;
 }
-
+.hacker-gallery-top
+{
+    display: flex;
+}
+.hacker-gallery-self
+{
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 10px;
+}
+.hacker-gallery-search
+{
+    box-sizing: border-box;
+    width: 50%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.hacker-gallery-search input
+{
+    width: 250px;
+}
+.modal-header
+{
+    height: 60px;
+}
+#hacker-id-input
+{
+    margin-bottom: 10px;
+}

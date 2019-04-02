@@ -17,6 +17,10 @@
     <router-view></router-view>
 </div>
 <style>
+    body *
+    {
+        font-family: "游教科書体 横用","YuKyokasho Yoko";
+    }
     .wrap{
         min-height: 100vh;
         display: flex;

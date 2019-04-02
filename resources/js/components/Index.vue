@@ -38,9 +38,13 @@
             <p>報告された先輩たち</p>
         </div>
         <div class="">
-            <div class="hacker-gallery-search">
-                <b-form-input v-model="search" type="text" placeholder="Search"/>
-                <!-- <i class="material-icons">search</i> -->
+            <div class="hacker-gallery-top">
+                <div class="hacker-gallery-self">
+                    <b-button v-b-modal.report-form variant="warning">新しくチーターを報告する</b-button>
+                </div>
+                <div class="hacker-gallery-search">
+                    <b-form-input v-model="search" type="text" placeholder="Search"/>
+                </div>
             </div>
             <div class="hacker-gallery-body">
                 <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in selected_hacker_players" v-on:click="getHackerIdFromCard(value)">
@@ -81,6 +85,13 @@
                         <div style="width: 5%; border-left: 1px solid rgba(0, 0, 0, 0.1)"></div>
                         <!-- Description Text -->
                         <div class="form-group hacker-description-message-wrap">
+                            <b-form-input
+                                id="hacker-id-input"
+                                v-model="hacker_id"
+                                type="text"
+                                required
+                                placeholder="チーターのID"
+                            ></b-form-input>
                             <label class="font-alphabet">
                                 Message　<small class="text-muted form-text">チート行為を選択すると自動的に入力されます</small>
                             </label>

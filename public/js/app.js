@@ -1767,7 +1767,7 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     selectCheckBox: function selectCheckBox() {
       this.setMessage();
-      return this.hacker_check.length > 0;
+      return this.hacker_check.length > 0 && this.hacker_id !== "";
     }
   },
   data: function data() {
@@ -1853,7 +1853,7 @@ __webpack_require__.r(__webpack_exports__);
       if (tmp === null || tmp === 'undefined') this.your_email = "";else this.your_email = tmp;
     },
     modalOk: function modalOk() {
-      var url = location.href + 'api/v0/report';
+      var url = location.href + 'api/v1/report';
       var params = {
         id: this.your_id,
         email: this.your_email,
@@ -28542,7 +28542,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-family: \"\\6E38\\6559\\79D1\\66F8\\4F53   \\6A2A\\7528\",\"YuKyokasho Yoko\"; font-weight: bold;\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.hacker-gallery-search\n{\n    width: 100%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.hacker-description-message-wrap\n{\n    width: 60%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 35%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n.kaigyo {\n    white-space: pre-wrap;\n    word-wrap: break-word;\n}\n.box17{\n    margin:2em 0;\n    position: relative;\n    padding: 0.5em 1.5em;\n    border-top: solid 2px black;\n    border-bottom: solid 2px black;\n}\n.box17:before, .box17:after{\n    content: '';\n    position: absolute;\n    top: -10px;\n    width: 2px;\n    height: calc(100% + 20px);\n    background-color: black;\n}\n.box17:before {left: 10px;}\n.box17:after {right: 10px;}\n.box17 p {\n    margin: 0;\n    padding: 0;\n}\n.font-alphabet\n{\n    font-family: 'Vollkorn', serif;\n}\n.alert-area\n{\n    position: fixed;\n    top: 70px;\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    z-index: 1000;\n}\n.alert-body\n{\n    width: 100%;\n    min-height: 100px;\n}\n\n", ""]);
+exports.push([module.i, ".header\n{\n    position: fixed;\n    top: 0px;\n    left: 0px;\n    width: 100%;\n    height: 50px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n    display: flex;\n    justify-content: center;\n}\n.header-left\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-start;\n}\n.header-center\n{\n    width: 60%;\n    display: flex;\n    justify-content: center;\n}\n.header-right\n{\n    width: 20%;\n    display: flex;\n    justify-content: flex-end;\n}\n.contents\n{\n    position: absolute;\n    top: 50px;\n    height: 1000px;\n    width: 100%;\n    flex: 1;\n    bottom: 50px;\n}\n.footer\n{\n    position: fixed;\n    bottom: 0px;\n    left: 0px;\n    width: 100%;\n    height: 25px;\n    color: white;\n    background: #191919;\n    z-index: 100;\n}\n.app-name {\n    margin: auto 10px;\n}\n.app-name a\n{\n    font-weight: bold;\n    color: white;\n    text-decoration: none;\n}\n.content\n{\n    width: 100%;\n    background: #F9F9F9;\n}\n.eye-catch\n{\n    width: 100%;\n    height: 400px;\n    background: #FFF url(" + escape(__webpack_require__(/*! ../../../../public/eye-catch-edit.jpg */ "./public/eye-catch-edit.jpg")) + ") no-repeat center top scroll;\n}\n.hacker-gallery-head\n{\n    width: 100%;\n    background: white;\n    margin-top: 3px;\n    display: block;\n    text-align: center;\n    padding: 40px 0;\n    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);\n    margin-bottom: 40px;\n}\n.hacker-gallery-head strong\n{\n    font-size: 40px;\n}\n.hacker-gallery-head p\n{\n    font-size: 20px;\n}\n.hacker-gallery-body\n{\n    justify-content: center;\n    display: flex;\n    flex-wrap: wrap;\n    margin-bottom: 100px;\n}\n.hacker-gallery-body-card\n{\n    width: 200px;\n    margin: 10px;\n    cursor: pointer;\n    box-sizing: border-box;\n    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);\n}\n.hacker-gallery-body-card:hover\n{\n    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);\n}\n.form-check-wrap\n{\n    cursor: pointer;\n    border-radius: 5px;\n    box-sizing: border-box;\n    padding-top: 10px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.form-check-wrap:hover\n{\n    background: rgba(0, 0, 0, 0.1);\n}\n.hacker-description-message-wrap\n{\n    width: 60%;\n}\n.hacker-modal\n{\n    display: flex;\n    justify-content: center;\n}\n.hacker-check-wrap\n{\n    width: 35%;\n}\n.report-nav\n{\n    justify-content: center;\n    background: white;\n    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);\n}\n.report-nav-el\n{\n    color: black;\n    font-weight: bold;\n    width: 250px;\n}\n.report-nav-el-active\n{\n    color: #0257FF;\n}\n.register-info\n{\n    text-align: center;\n    padding: 0 10px;\n}\n.register-title\n{\n    color: #A4A4A4;\n}\n.kaigyo {\n    white-space: pre-wrap;\n    word-wrap: break-word;\n}\n.box17{\n    margin:2em 0;\n    position: relative;\n    padding: 0.5em 1.5em;\n    border-top: solid 2px black;\n    border-bottom: solid 2px black;\n}\n.box17:before, .box17:after{\n    content: '';\n    position: absolute;\n    top: -10px;\n    width: 2px;\n    height: calc(100% + 20px);\n    background-color: black;\n}\n.box17:before {left: 10px;}\n.box17:after {right: 10px;}\n.box17 p {\n    margin: 0;\n    padding: 0;\n}\n.font-alphabet\n{\n    font-family: 'Vollkorn', serif;\n}\n.alert-area\n{\n    position: fixed;\n    top: 70px;\n    display: flex;\n    width: 100%;\n    justify-content: center;\n    z-index: 1000;\n}\n.alert-body\n{\n    width: 100%;\n    min-height: 100px;\n}\n.hacker-gallery-top\n{\n    display: flex;\n}\n.hacker-gallery-self\n{\n    box-sizing: border-box;\n    width: 50%;\n    padding-left: 10px;\n}\n.hacker-gallery-search\n{\n    box-sizing: border-box;\n    width: 50%;\n    padding-right: 10px;\n    display: flex;\n    justify-content: flex-end;\n}\n.hacker-gallery-search input\n{\n    width: 250px;\n}\n.modal-header\n{\n    height: 60px;\n}\n#hacker-id-input\n{\n    margin-bottom: 10px;\n}\n", ""]);
 
 // exports
 
@@ -59937,23 +59937,47 @@ var render = function() {
         "div",
         {},
         [
-          _c(
-            "div",
-            { staticClass: "hacker-gallery-search" },
-            [
-              _c("b-form-input", {
-                attrs: { type: "text", placeholder: "Search" },
-                model: {
-                  value: _vm.search,
-                  callback: function($$v) {
-                    _vm.search = $$v
+          _c("div", { staticClass: "hacker-gallery-top" }, [
+            _c(
+              "div",
+              { staticClass: "hacker-gallery-self" },
+              [
+                _c(
+                  "b-button",
+                  {
+                    directives: [
+                      {
+                        name: "b-modal",
+                        rawName: "v-b-modal.report-form",
+                        modifiers: { "report-form": true }
+                      }
+                    ],
+                    attrs: { variant: "warning" }
                   },
-                  expression: "search"
-                }
-              })
-            ],
-            1
-          ),
+                  [_vm._v("新しくチーターを報告する")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "hacker-gallery-search" },
+              [
+                _c("b-form-input", {
+                  attrs: { type: "text", placeholder: "Search" },
+                  model: {
+                    value: _vm.search,
+                    callback: function($$v) {
+                      _vm.search = $$v
+                    },
+                    expression: "search"
+                  }
+                })
+              ],
+              1
+            )
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -60093,6 +60117,22 @@ var render = function() {
                       staticClass: "form-group hacker-description-message-wrap"
                     },
                     [
+                      _c("b-form-input", {
+                        attrs: {
+                          id: "hacker-id-input",
+                          type: "text",
+                          required: "",
+                          placeholder: "チーターのID"
+                        },
+                        model: {
+                          value: _vm.hacker_id,
+                          callback: function($$v) {
+                            _vm.hacker_id = $$v
+                          },
+                          expression: "hacker_id"
+                        }
+                      }),
+                      _vm._v(" "),
                       _c("label", { staticClass: "font-alphabet" }, [
                         _vm._v("\n                                Message　"),
                         _c("small", { staticClass: "text-muted form-text" }, [
@@ -60144,7 +60184,8 @@ var render = function() {
                           }
                         }
                       })
-                    ]
+                    ],
+                    1
                   )
                 ])
               ])

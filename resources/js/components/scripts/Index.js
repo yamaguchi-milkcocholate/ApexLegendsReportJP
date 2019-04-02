@@ -2,7 +2,7 @@ export default {
     computed: {
         selectCheckBox: function () {
             this.setMessage();
-            return this.hacker_check.length > 0
+            return this.hacker_check.length > 0 && this.hacker_id !== ""
         }
     },
     data: function() {
@@ -94,7 +94,7 @@ export default {
                 this.your_email = tmp;
         },
         modalOk: function () {
-            let url = location.href + 'api/v0/report';
+            let url = location.href + 'api/v1/report';
             let params = {
                 id: this.your_id,
                 email: this.your_email,
