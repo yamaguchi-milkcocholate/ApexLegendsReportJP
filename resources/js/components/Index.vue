@@ -47,13 +47,17 @@
                 </div>
             </div>
             <div class="hacker-gallery-body">
-                <div v-b-modal.report-form class="card text-center hacker-gallery-body-card" v-for="(value) in selected_hacker_players" v-on:click="getHackerIdFromCard(value)">
+                <div v-b-modal.report-form
+                     class="card text-center hacker-gallery-body-card"
+                     v-for="(value) in selected_hacker_players"
+                     v-on:click="getHackerIdFromCard(value.hacker_id )"
+                >
                     <div class="card-body">
-                        <h5 class="card-title">{{value}}</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <h5 class="card-title">{{value.hacker_id}}</h5>
+                        <p class="card-text">count: {{ value.count }}</p>
                     </div>
                     <div class="card-footer text-muted">
-                        2 days ago
+                        {{ value.last }}
                     </div>
                 </div>
             </div>

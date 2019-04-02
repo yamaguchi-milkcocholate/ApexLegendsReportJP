@@ -1819,7 +1819,7 @@ __webpack_require__.r(__webpack_exports__);
         text: "プレイヤーの体力や距離などの情報が表示される"
       }],
       selected_hacker_players: [],
-      hacker_players: ['hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3', 'hacker-1', 'hacker-2', 'hacker-3'],
+      hacker_players: [],
       dismissCountDown: 0,
       alertMessage: "",
       dismissSecs: 3,
@@ -1832,9 +1832,13 @@ __webpack_require__.r(__webpack_exports__);
         this.selected_hacker_players = this.hacker_players;
       } else {
         var target = this.search;
-        this.selected_hacker_players = this.hacker_players.filter(function (item) {
-          return item.match(target);
-        });
+        this.selected_hacker_players = [];
+
+        for (var key in this.hacker_players) {
+          if (this.hacker_players[key].hacker_id.match(target)) {
+            this.selected_hacker_players.push(this.hacker_players[key]);
+          }
+        }
       }
     }
   },
@@ -1853,7 +1857,7 @@ __webpack_require__.r(__webpack_exports__);
       if (tmp === null || tmp === 'undefined') this.your_email = "";else this.your_email = tmp;
     },
     modalOk: function modalOk() {
-      var url = location.href + 'api/v1/report';
+      var url = location.href + 'api/v0/report';
       var params = {
         id: this.your_id,
         email: this.your_email,
@@ -1875,6 +1879,7 @@ __webpack_require__.r(__webpack_exports__);
       }).catch(function (error) {
         if (error.response) {
           if (error.response.status === 422) {
+            console.log(error.response.errors);
             showAlert('入力内容に誤りがあります!!', 'danger');
             console.log('入力内容に誤りがあります!!');
           }
@@ -1917,11 +1922,33 @@ __webpack_require__.r(__webpack_exports__);
       this.alertType = alertType;
       this.dismissCountDown = this.dismissSecs;
       this.alertMessage = message;
+    },
+    initHackers: function initHackers() {
+      var url = location.href + 'api/v1/init';
+      var setHackers = this.setHackers;
+      this.$axios.post(url).then(function (response) {
+        if (response.status === 200) {
+          setHackers(response.data.data);
+        } else {
+          console.log('Unknown Error');
+          console.log(response);
+        }
+      }).catch(function (error) {
+        if (error.response) {
+          if (error.response.status === 422) {
+            console.log(error.response);
+          }
+        }
+      });
+    },
+    setHackers: function setHackers(hackers) {
+      this.hacker_players = hackers;
+      this.selected_hacker_players = hackers;
     }
   },
   mounted: function mounted() {
     this.setYou();
-    this.selected_hacker_players = this.hacker_players;
+    this.initHackers();
   }
 });
 
@@ -59996,26 +60023,26 @@ var render = function() {
                   staticClass: "card text-center hacker-gallery-body-card",
                   on: {
                     click: function($event) {
-                      return _vm.getHackerIdFromCard(value)
+                      return _vm.getHackerIdFromCard(value.hacker_id)
                     }
                   }
                 },
                 [
                   _c("div", { staticClass: "card-body" }, [
                     _c("h5", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(value))
+                      _vm._v(_vm._s(value.hacker_id))
                     ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "With supporting text below as a natural lead-in to additional content."
-                      )
+                      _vm._v("count: " + _vm._s(value.count))
                     ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "card-footer text-muted" }, [
                     _vm._v(
-                      "\n                        2 days ago\n                    "
+                      "\n                        " +
+                        _vm._s(value.last) +
+                        "\n                    "
                     )
                   ])
                 ]

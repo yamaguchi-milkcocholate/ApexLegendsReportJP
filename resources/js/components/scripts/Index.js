@@ -28,23 +28,7 @@ export default {
                 {key: "ESP", value: "ESP表示", text: "プレイヤーの体力や距離などの情報が表示される"},
             ],
             selected_hacker_players: [],
-            hacker_players:[
-                'hacker-1',
-                'hacker-2',
-                'hacker-3',
-                'hacker-1',
-                'hacker-2',
-                'hacker-3',
-                'hacker-1',
-                'hacker-2',
-                'hacker-3',
-                'hacker-1',
-                'hacker-2',
-                'hacker-3',
-                'hacker-1',
-                'hacker-2',
-                'hacker-3',
-            ],
+            hacker_players:[],
             dismissCountDown: 0,
             alertMessage: "",
             dismissSecs: 3,
@@ -54,13 +38,16 @@ export default {
     watch: {
         search: function() {
             if(this.search === "") {
-                this.selected_hacker_players = this.hacker_players
+                    this.selected_hacker_players = this.hacker_players
             }
             else {
                 let target = this.search;
-                this.selected_hacker_players = this.hacker_players.filter((item) => {
-                    return item.match(target);
-                });
+                this.selected_hacker_players = [];
+                for(let key in this.hacker_players) {
+                    if (this.hacker_players[key].hacker_id.match(target)) {
+                        this.selected_hacker_players.push(this.hacker_players[key])
+                    }
+                }
             }
         },
     },
@@ -155,10 +142,35 @@ export default {
             this.alertType = alertType;
             this.dismissCountDown = this.dismissSecs;
             this.alertMessage = message
+        },
+        initHackers() {
+            let url = location.href + 'api/v1/init';
+            let setHackers = this.setHackers;
+            this.$axios.post(url)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        setHackers(response.data.data)
+                    }
+                    else {
+                        console.log('Unknown Error');
+                        console.log(response)
+                    }
+                })
+                .catch(function (error) {
+                    if(error.response) {
+                        if(error.response.status === 422) {
+                            console.log(error.response);
+                        }
+                    }
+                });
+        },
+        setHackers: function (hackers) {
+            this.hacker_players = hackers;
+            this.selected_hacker_players = hackers
         }
     },
     mounted () {
         this.setYou();
-        this.selected_hacker_players = this.hacker_players
+        this.initHackers();
     }
 };
