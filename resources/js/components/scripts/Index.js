@@ -2,7 +2,14 @@ export default {
     computed: {
         selectCheckBox: function () {
             this.setMessage();
-            return this.hacker_check.length > 0 && this.hacker_id !== ""
+            if (this.hacker_check.length > 0 && this.hacker_id !== "") {
+                this.setReportButton(false);
+                return true
+            }
+            else {
+                this.setReportButton(true);
+                return false
+            }
         }
     },
     data: function() {
@@ -34,6 +41,8 @@ export default {
             dismissSecs: 3,
             alertType: "danger",
             updateDisabled: false,
+            reportDisabled: false,
+            reportWaiting: false
         };
     },
     watch: {
@@ -82,6 +91,17 @@ export default {
                 this.your_email = tmp;
         },
         modalOk: function () {
+            let showAlert = this.showAlert;
+            if (this.reportDisabled) {
+                showAlert('入力内容に誤りがあります!!', 'danger');
+                console.log('入力内容に誤りがあります!!');
+                return;
+            }
+            if (this.reportWaiting) {
+                showAlert('報告中に新しい報告はできません!!', 'warning');
+                console.log('報告中に新しい報告はできません!!');
+                return;
+            }
             let url = location.href + 'api/v0/report';
             let params = {
                 id: this.your_id,
@@ -89,11 +109,12 @@ export default {
                 first_name: this.your_first_name,
                 last_name: this.your_last_name,
                 hacker_id: this.hacker_id,
-                message: this.hacker_message
+                message: this.hacker_message,
             };
-            let showAlert = this.showAlert;
+            let setReportWaiting = this.setReportWaiting;
+            setReportWaiting(true);
             this.$axios.post(url, params)
-                .then(function (response) {
+                .then( (response) => {
                     if (response.status === 200) {
                         showAlert('報告完了しました!!', 'success');
                         console.log(response.data);
@@ -104,7 +125,7 @@ export default {
                         console.log(response)
                     }
                 })
-                .catch(function (error) {
+                .catch( (error) => {
                     if(error.response) {
                         if(error.response.status === 422) {
                             console.log(error.response.errors);
@@ -112,7 +133,8 @@ export default {
                             console.log('入力内容に誤りがあります!!');
                         }
                     }
-                });
+                })
+                .finally(() => {setReportWaiting(false)});
         },
         modalShown: function () {
             this.your_message = "";
@@ -174,6 +196,12 @@ export default {
         },
         setUpdateButton: function(status) {
             this.updateDisabled = status
+        },
+        setReportButton: function(status) {
+            this.reportDisabled = status
+        },
+        setReportWaiting: function(status) {
+            this.reportWaiting = status
         }
     },
     mounted () {

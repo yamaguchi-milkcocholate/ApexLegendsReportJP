@@ -1767,7 +1767,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     selectCheckBox: function selectCheckBox() {
       this.setMessage();
-      return this.hacker_check.length > 0 && this.hacker_id !== "";
+
+      if (this.hacker_check.length > 0 && this.hacker_id !== "") {
+        this.setReportButton(false);
+        return true;
+      } else {
+        this.setReportButton(true);
+        return false;
+      }
     }
   },
   data: function data() {
@@ -1824,7 +1831,9 @@ __webpack_require__.r(__webpack_exports__);
       alertMessage: "",
       dismissSecs: 3,
       alertType: "danger",
-      updateDisabled: false
+      updateDisabled: false,
+      reportDisabled: false,
+      reportWaiting: false
     };
   },
   watch: {
@@ -1858,6 +1867,20 @@ __webpack_require__.r(__webpack_exports__);
       if (tmp === null || tmp === 'undefined') this.your_email = "";else this.your_email = tmp;
     },
     modalOk: function modalOk() {
+      var showAlert = this.showAlert;
+
+      if (this.reportDisabled) {
+        showAlert('入力内容に誤りがあります!!', 'danger');
+        console.log('入力内容に誤りがあります!!');
+        return;
+      }
+
+      if (this.reportWaiting) {
+        showAlert('報告中に新しい報告はできません!!', 'warning');
+        console.log('報告中に新しい報告はできません!!');
+        return;
+      }
+
       var url = location.href + 'api/v0/report';
       var params = {
         id: this.your_id,
@@ -1867,7 +1890,8 @@ __webpack_require__.r(__webpack_exports__);
         hacker_id: this.hacker_id,
         message: this.hacker_message
       };
-      var showAlert = this.showAlert;
+      var setReportWaiting = this.setReportWaiting;
+      setReportWaiting(true);
       this.$axios.post(url, params).then(function (response) {
         if (response.status === 200) {
           showAlert('報告完了しました!!', 'success');
@@ -1885,6 +1909,8 @@ __webpack_require__.r(__webpack_exports__);
             console.log('入力内容に誤りがあります!!');
           }
         }
+      }).finally(function () {
+        setReportWaiting(false);
       });
     },
     modalShown: function modalShown() {
@@ -1952,6 +1978,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     setUpdateButton: function setUpdateButton(status) {
       this.updateDisabled = status;
+    },
+    setReportButton: function setReportButton(status) {
+      this.reportDisabled = status;
+    },
+    setReportWaiting: function setReportWaiting(status) {
+      this.reportWaiting = status;
     }
   },
   mounted: function mounted() {
