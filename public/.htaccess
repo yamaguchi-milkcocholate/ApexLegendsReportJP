@@ -1,4 +1,6 @@
 <IfModule mod_rewrite.c>
+    SetEnv APP_ENV dev
+
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>

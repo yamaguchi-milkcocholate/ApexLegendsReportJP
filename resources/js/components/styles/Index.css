@@ -1,0 +1,233 @@
+.header
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    color: white;
+    background: #191919;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+}
+.header-left
+{
+    width: 20%;
+    display: flex;
+    justify-content: flex-start;
+}
+.header-center
+{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+}
+.header-right
+{
+    width: 20%;
+    display: flex;
+    justify-content: flex-end;
+}
+.contents
+{
+    position: absolute;
+    top: 50px;
+    height: 1000px;
+    width: 100%;
+    flex: 1;
+    bottom: 50px;
+}
+.footer
+{
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 25px;
+    color: white;
+    background: #191919;
+    z-index: 100;
+}
+.app-name {
+    margin: auto 10px;
+}
+.app-name a
+{
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+.content
+{
+    width: 100%;
+    background: #F9F9F9;
+}
+.eye-catch
+{
+    width: 100%;
+    height: 400px;
+    background: #FFF url("../../../../public/eye-catch-edit.jpg") no-repeat center top scroll;
+}
+.hacker-gallery-head
+{
+    width: 100%;
+    background: white;
+    margin-top: 3px;
+    display: block;
+    text-align: center;
+    padding: 40px 0;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+}
+.hacker-gallery-head strong
+{
+    font-size: 40px;
+}
+.hacker-gallery-head p
+{
+    font-size: 20px;
+}
+.hacker-gallery-body
+{
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+}
+.hacker-gallery-body-card
+{
+    width: 200px;
+    margin: 10px;
+    cursor: pointer;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.1);
+}
+.hacker-gallery-body-card:hover
+{
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+.form-check-wrap
+{
+    cursor: pointer;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding-top: 10px;
+    user-select: none;
+}
+.form-check-wrap:hover
+{
+    background: rgba(0, 0, 0, 0.1);
+}
+.hacker-description-message-wrap
+{
+    width: 60%;
+}
+.hacker-modal
+{
+    display: flex;
+    justify-content: center;
+}
+.hacker-check-wrap
+{
+    width: 35%;
+}
+.report-nav
+{
+    justify-content: center;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.report-nav-el
+{
+    color: black;
+    font-weight: bold;
+    width: 250px;
+}
+.report-nav-el-active
+{
+    color: #0257FF;
+}
+.register-info
+{
+    text-align: center;
+    padding: 0 10px;
+}
+.register-title
+{
+    color: #A4A4A4;
+}
+.kaigyo {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.box17{
+    margin:2em 0;
+    position: relative;
+    padding: 0.5em 1.5em;
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+}
+.box17:before, .box17:after{
+    content: '';
+    position: absolute;
+    top: -10px;
+    width: 2px;
+    height: -webkit-calc(100% + 20px);
+    height: calc(100% + 20px);
+    background-color: black;
+}
+.box17:before {left: 10px;}
+.box17:after {right: 10px;}
+.box17 p {
+    margin: 0;
+    padding: 0;
+}
+.font-alphabet
+{
+    font-family: 'Vollkorn', serif;
+}
+.alert-area
+{
+    position: fixed;
+    top: 70px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    z-index: 1000;
+}
+.alert-body
+{
+    width: 100%;
+    min-height: 100px;
+}
+.hacker-gallery-top
+{
+    display: flex;
+}
+.hacker-gallery-self
+{
+    box-sizing: border-box;
+    width: 50%;
+    padding-left: 10px;
+}
+.hacker-gallery-search
+{
+    box-sizing: border-box;
+    width: 50%;
+    padding-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.hacker-gallery-search input
+{
+    width: 250px;
+}
+.modal-header
+{
+    height: 60px;
+}
+#hacker-id-input
+{
+    margin-bottom: 10px;
+}
