@@ -44,7 +44,7 @@ class ReportController extends Controller
                 $request->input('last_name'),
                 $request->input('email'),
                 $request->input('message'));
-            $repository->Save($request->input('id'));
+            $repository->Save($request->input('hacker_id'));
             return response()->json([
                 'success' => true
             ], 200);
@@ -57,10 +57,12 @@ class ReportController extends Controller
 
     /**
      * @param ReportRequest $request
+     * @param ReportRepository $repository
      * @return \Illuminate\Http\JsonResponse
      */
-    public function Test(ReportRequest $request)
+    public function Test(ReportRequest $request, ReportRepository $repository)
     {
+        $repository->Save($request->input('hacker_id'));
         return response()->json([
             'success' => true,
             'data' => $request->all()
