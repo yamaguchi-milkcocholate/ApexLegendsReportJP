@@ -1,6 +1,6 @@
 <?php
 
-$DATABASE_URL = parse_url(getenv("DATABASE_URL"));
+//$DATABASE_URL = parse_url(getenv("DATABASE_URL"));
 
 return [
 
@@ -62,6 +62,7 @@ return [
         ],
 
         'pgsql' => [
+            /*
             'driver' => 'pgsql',
             'host' => $DATABASE_URL["host"],
             'port' => $DATABASE_URL["port"],
@@ -72,7 +73,8 @@ return [
             'prefix' => '',
             'schema' => 'public',
             'sslmode' => 'require',
-            /*
+            */
+
             'driver' => 'pgsql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
@@ -84,7 +86,7 @@ return [
             'prefix_indexes' => true,
             'schema' => 'public',
             'sslmode' => 'prefer',
-            */
+
         ],
 
         'sqlsrv' => [
