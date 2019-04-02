@@ -6,6 +6,11 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueLocalStorage from 'vue-localstorage'
+import BootstrapVue from 'bootstrap-vue'
+import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 require('./bootstrap');
 
@@ -25,10 +30,15 @@ require('./bootstrap');
 
 
 Vue.use(VueRouter);
+Vue.use(VueLocalStorage);
+Vue.use(BootstrapVue);
+Vue.prototype.$axios = axios; // この行を追加
+
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/public', component: require('./components/Index.vue').default },
+        { path: '/', component: require('./components/Index.vue').default },
+        { path: '/register', component: require('./components/Register.vue').default},
     ]
 });
 
@@ -42,5 +52,19 @@ const router = new VueRouter({
 
 const app = new Vue({
     router,
-    el: '#app'
+    el: '#app',
+    localStorage: {
+        register_id: {
+            type: String,
+        },
+        register_first_name: {
+            type: String
+        },
+        register_last_name: {
+            type: String
+        },
+        register_email: {
+            type: String
+        },
+    }
 });
