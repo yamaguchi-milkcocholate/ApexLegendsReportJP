@@ -5,48 +5,65 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ReportRequest;
 use App\Repositories\ReportRepository;
 use App\Services\WebDriverService;
+use Facebook\WebDriver\Exception\NoSuchElementException;
+use Facebook\WebDriver\Exception\TimeOutException;
 
 class ReportController extends Controller
 {
     /**
-     * @var WebDriverService
-     */
-    private $webDriver;
-
-    /**
-     * @var ReportRepository
-     */
-    private $repository;
-
-    /**
-     * ReportController constructor.
-     * @param WebDriverService $webDriver
      * @param ReportRepository $repository
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function __construct(WebDriverService $webDriver, ReportRepository $repository)
+    public function Index(ReportRepository $repository)
     {
-        $this->webDriver = $webDriver;
-        $this->repository = $repository;
+        try {
+            return response()->json([
+                'success' => true,
+                'data' => $repository->Fetch()
+            ], 200);
+        }
+        catch(\Exception $exception){
+            return response()->json([
+                'success' => false,
+            ], 422);
+        }
     }
 
-    public function Report(ReportRequest $request)
+    /**
+     * @param ReportRequest $request
+     * @param ReportRepository $repository
+     * @param WebDriverService $webDriver
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function Report(ReportRequest $request, ReportRepository $repository, WebDriverService $webDriver)
     {
-        return response()->json([
-            'success' => $this->webDriver->Submit(
+        try {
+            $webDriver->Submit(
                 $request->input('id'),
                 $request->input('first_name'),
                 $request->input('last_name'),
                 $request->input('email'),
-                $request->input('message')
-            )
-        ]);
+                $request->input('message'));
+            $repository->Save($request->input('id'));
+            return response()->json([
+                'success' => true
+            ], 200);
+        } catch (NoSuchElementException | TimeOutException $exception) {
+            return response()->json([
+                'success' => false
+            ], 422);
+        }
     }
 
+    /**
+     * @param ReportRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function Test(ReportRequest $request)
     {
         return response()->json([
             'success' => true,
             'data' => $request->all()
-        ]);
+        ], 200);
     }
 }

@@ -26,6 +26,7 @@ Route::post('/v1/report', 'ReportController@Report');
 
 Route::post('/v0/report', 'ReportController@Test');
 
+Route::post('/v1/init', 'ReportController@Index');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
