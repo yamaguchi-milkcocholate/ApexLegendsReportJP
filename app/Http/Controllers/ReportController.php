@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
+use App\Repositories\ReportRepository;
 use App\Services\WebDriverService;
 
 class ReportController extends Controller
@@ -13,12 +14,19 @@ class ReportController extends Controller
     private $webDriver;
 
     /**
+     * @var ReportRepository
+     */
+    private $repository;
+
+    /**
      * ReportController constructor.
      * @param WebDriverService $webDriver
+     * @param ReportRepository $repository
      */
-    public function __construct(WebDriverService $webDriver)
+    public function __construct(WebDriverService $webDriver, ReportRepository $repository)
     {
         $this->webDriver = $webDriver;
+        $this->repository = $repository;
     }
 
     public function Report(ReportRequest $request)
@@ -29,7 +37,7 @@ class ReportController extends Controller
                 $request->input('first_name'),
                 $request->input('last_name'),
                 $request->input('email'),
-                $request->input('message'),
+                $request->input('message')
             )
         ]);
     }
