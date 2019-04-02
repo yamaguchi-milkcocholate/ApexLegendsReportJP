@@ -39,6 +39,7 @@ const router = new VueRouter({
     routes: [
         { path: '/', component: require('./components/Index.vue').default },
         { path: '/register', component: require('./components/Register.vue').default},
+        { path: '/about', component: require('./components/About.vue').default},
     ]
 });
 

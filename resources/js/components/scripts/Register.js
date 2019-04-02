@@ -5,10 +5,10 @@ export default {
             return this.your_email.match(/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/) !== null;
         },
         lastNameState() {
-            return this.your_last_name.length > 0;
+            return true
         },
         firstNameState() {
-            return true
+            return this.your_first_name.length > 0
         },
         idState() {
             return true
