@@ -31,6 +31,7 @@
             <div class="nav report-nav">
                 <router-link class="nav-link report-nav-el report-nav-el-active active" to="/">チーターギャラリー</router-link>
                 <router-link class="nav-link report-nav-el" to="/register">登録</router-link>
+                <router-link class="nav-link report-nav-el" to="/about">サイトについて</router-link>
             </div>
         </div>
         <div class="hacker-gallery-head">
@@ -80,7 +81,7 @@
                                     :value="item.key"
                                     :state="selectCheckBox"
                                 >
-                                    {{item.key}} ({{item.value}}) <br>
+                                    {{item.value}} <br>
                                     <small class="text-muted form-text">
                                     {{item.text}}
                                     </small>
