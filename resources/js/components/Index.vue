@@ -40,7 +40,8 @@
         <div class="">
             <div class="hacker-gallery-top">
                 <div class="hacker-gallery-self">
-                    <b-button v-b-modal.report-form variant="warning">新しくチーターを報告する</b-button>
+                    <b-button v-b-modal.report-form variant="warning">新しくチーターを報告</b-button>
+                    <b-button v-bind:disabled="updateDisabled" v-on:click="initHackers">データを更新</b-button>
                 </div>
                 <div class="hacker-gallery-search">
                     <b-form-input v-model="search" type="text" placeholder="Search"/>

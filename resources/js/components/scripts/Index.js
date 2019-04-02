@@ -33,6 +33,7 @@ export default {
             alertMessage: "",
             dismissSecs: 3,
             alertType: "danger",
+            updateDisabled: false,
         };
     },
     watch: {
@@ -144,10 +145,12 @@ export default {
             this.alertMessage = message
         },
         initHackers() {
+            let setUpdateButton = this.setUpdateButton;
+            setUpdateButton(true);
             let url = location.href + 'api/v1/init';
             let setHackers = this.setHackers;
             this.$axios.post(url)
-                .then(function (response) {
+                .then( (response) => {
                     if (response.status === 200) {
                         setHackers(response.data.data)
                     }
@@ -156,17 +159,21 @@ export default {
                         console.log(response)
                     }
                 })
-                .catch(function (error) {
+                .catch( (error) => {
                     if(error.response) {
                         if(error.response.status === 422) {
                             console.log(error.response);
                         }
                     }
-                });
+                })
+                .finally(() => {setUpdateButton(false)});
         },
         setHackers: function (hackers) {
             this.hacker_players = hackers;
             this.selected_hacker_players = hackers
+        },
+        setUpdateButton: function(status) {
+            this.updateDisabled = status
         }
     },
     mounted () {

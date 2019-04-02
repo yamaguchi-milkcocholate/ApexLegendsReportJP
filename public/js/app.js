@@ -1823,7 +1823,8 @@ __webpack_require__.r(__webpack_exports__);
       dismissCountDown: 0,
       alertMessage: "",
       dismissSecs: 3,
-      alertType: "danger"
+      alertType: "danger",
+      updateDisabled: false
     };
   },
   watch: {
@@ -1924,6 +1925,8 @@ __webpack_require__.r(__webpack_exports__);
       this.alertMessage = message;
     },
     initHackers: function initHackers() {
+      var setUpdateButton = this.setUpdateButton;
+      setUpdateButton(true);
       var url = location.href + 'api/v1/init';
       var setHackers = this.setHackers;
       this.$axios.post(url).then(function (response) {
@@ -1939,11 +1942,16 @@ __webpack_require__.r(__webpack_exports__);
             console.log(error.response);
           }
         }
+      }).finally(function () {
+        setUpdateButton(false);
       });
     },
     setHackers: function setHackers(hackers) {
       this.hacker_players = hackers;
       this.selected_hacker_players = hackers;
+    },
+    setUpdateButton: function setUpdateButton(status) {
+      this.updateDisabled = status;
     }
   },
   mounted: function mounted() {
@@ -59981,7 +59989,16 @@ var render = function() {
                     ],
                     attrs: { variant: "warning" }
                   },
-                  [_vm._v("新しくチーターを報告する")]
+                  [_vm._v("新しくチーターを報告")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    attrs: { disabled: _vm.updateDisabled },
+                    on: { click: _vm.initHackers }
+                  },
+                  [_vm._v("データを更新")]
                 )
               ],
               1
