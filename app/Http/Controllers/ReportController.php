@@ -3,29 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ReportRequest;
-use App\Repositories\FormRepository;
-use App\Services\ChromeDriverService;
+use App\Services\WebDriverService;
 
 class ReportController extends Controller
 {
+    /**
+     * @var WebDriverService
+     */
+    private $webDriver;
+
+    /**
+     * ReportController constructor.
+     * @param WebDriverService $webDriver
+     */
+    public function __construct(WebDriverService $webDriver)
+    {
+        $this->webDriver = $webDriver;
+    }
+
     public function Report(ReportRequest $request)
     {
-        $validated = $request->validated();
-        $service = app(ChromeDriverService::class);
-        $driver = $service->Driver();
-        $repository = app(FormRepository::class);
-        $result = $repository->Submit($driver);
-        $json = collect();
-        $json->put('success', $result);
-        return $json->toJson();
+        return response()->json([
+            'success' => $this->webDriver->Submit(
+                $request->input('id'),
+                $request->input('first_name'),
+                $request->input('last_name'),
+                $request->input('email'),
+                $request->input('message'),
+            )
+        ]);
     }
 
     public function Test(ReportRequest $request)
     {
-        $validated = $request->validated();
-        $json = collect();
-        $json->put('success', true);
-        $json->put('data', $validated);
-        return $json->toJson();
+        return response()->json([
+            'success' => true,
+            'data' => $request->all()
+        ]);
     }
 }

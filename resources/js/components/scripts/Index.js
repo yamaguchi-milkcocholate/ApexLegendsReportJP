@@ -94,7 +94,7 @@ export default {
                 this.your_email = tmp;
         },
         modalOk: function () {
-            let url = location.href + 'api/v1/report';
+            let url = location.href + 'api/v0/report';
             let params = {
                 id: this.your_id,
                 email: this.your_email,
@@ -119,6 +119,7 @@ export default {
                 .catch(function (error) {
                     if(error.response) {
                         if(error.response.status === 422) {
+                            console.log(error.response.errors);
                             showAlert('入力内容に誤りがあります!!', 'danger');
                             console.log('入力内容に誤りがあります!!');
                         }
