@@ -63,6 +63,7 @@ class ReportController extends Controller
     public function Test(ReportRequest $request, ReportRepository $repository)
     {
         $repository->Save($request->input('hacker_id'));
+        usleep(3000000);
         return response()->json([
             'success' => true,
             'data' => $request->all()
