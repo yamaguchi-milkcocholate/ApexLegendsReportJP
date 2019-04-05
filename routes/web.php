@@ -22,4 +22,8 @@ Route::get('/{any}', function () {
     return view('app');
 })->where('any', '.*');
 
+Route::get('/public/{any}', function () {
+    return view('app');
+})->where('any', '.*');
+
 
