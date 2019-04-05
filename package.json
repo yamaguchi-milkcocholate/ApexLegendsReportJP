@@ -33,6 +33,7 @@
         "selenium-standalone": "^6.16.0",
         "vue-localstorage": "^0.6.2",
         "vue-router": "^3.0.2",
-        "webpack": "^4.29.6"
+        "webpack": "^4.29.6",
+        "cross-env": "^5.2.0"
     }
 }
