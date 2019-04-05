@@ -103,7 +103,7 @@ export default {
                 console.log('報告中に新しい報告はできません!!');
                 return;
             }
-            let url = location.href + 'api/v0/report';
+            let url = location.href + 'api/v1/report';
             let params = {
                 id: this.your_id,
                 email: this.your_email,

@@ -3,7 +3,7 @@
     <div class="header">
         <div class="header-left">
             <div class="app-name">
-                <a href="/">ApexLegendsReportJP</a>
+                <a href="/public">ApexLegendsReportJP</a>
             </div>
         </div>
         <div class="header-center">
@@ -29,9 +29,9 @@
             <div class="eye-catch">
             </div>
             <div class="nav report-nav">
-                <router-link class="nav-link report-nav-el report-nav-el-active active" to="/">チーターギャラリー</router-link>
-                <router-link class="nav-link report-nav-el" to="/register">登録</router-link>
-                <router-link class="nav-link report-nav-el" to="/about">サイトについて</router-link>
+                <router-link class="nav-link report-nav-el report-nav-el-active active" to="/public">チーターギャラリー</router-link>
+                <router-link class="nav-link report-nav-el" to="/public/register">登録</router-link>
+                <router-link class="nav-link report-nav-el" to="/public/about">サイトについて</router-link>
             </div>
         </div>
         <div class="hacker-gallery-head">
