@@ -26,7 +26,9 @@
     </div>
     <div class="contents">
         <div class="content">
-            <div class="eye-catch">
+            <div class="eye-catch"
+                style="background: #FFF url('public/images/eye-catch-edit.jpg') no-repeat center top scroll;"
+            >
             </div>
             <div class="nav report-nav">
                 <router-link class="nav-link report-nav-el report-nav-el-active active" to="/public">チーターギャラリー</router-link>
