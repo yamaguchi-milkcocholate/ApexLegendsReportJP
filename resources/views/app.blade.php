@@ -15,23 +15,118 @@
     <title>ApexLegendsReportJP</title>
 
     <link rel="stylesheet" href="{{ 'css/app.css' }}">
+    <style>
+        body *
+        {
+            font-family: "游教科書体 横用","YuKyokasho Yoko";
+        }
+        .wrap{
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+        }
+        .eye-catch
+        {
+            position: absolute;
+            top: 50px;
+            z-index: 99;
+            width: 100%;
+            height: 400px;
+            background: #FFF url('images/eye-catch-edit.jpg') no-repeat center top scroll;
+        }
+        .header
+        {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 50px;
+            color: white;
+            background: #191919;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+        }
+        .header-left
+        {
+            width: 20%;
+            display: flex;
+            justify-content: flex-start;
+        }
+        .header-center
+        {
+            width: 60%;
+            display: flex;
+            justify-content: center;
+        }
+        .header-right
+        {
+            width: 20%;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .contents
+        {
+            position: absolute;
+            top: 450px;
+            height: 1000px;
+            width: 100%;
+            flex: 1;
+            bottom: 50px;
+        }
+        .footer
+        {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: 25px;
+            color: white;
+            background: #191919;
+            z-index: 100;
+        }
+        .app-name {
+            margin: auto 10px;
+        }
+        .app-name a
+        {
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .content
+        {
+            width: 100%;
+            background: #F9F9F9;
+        }
+        .report-nav
+        {
+            justify-content: center;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .report-nav-el
+        {
+            color: black;
+            font-weight: bold;
+            width: 250px;
+            text-align: center;
+        }
+        .report-nav-el-active
+        {
+            color: #0257FF;
+        }
+    </style>
 </head>
 <body>
 <div id="app" class="wrap">
+    <div class="eye-catch"
+         style=""
+    >
+    </div>
     <router-view></router-view>
 </div>
-<style>
-    body *
-    {
-        font-family: "游教科書体 横用","YuKyokasho Yoko";
-    }
-    .wrap{
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        font-family: 'Hiragino Kaku Gothic Pro','ヒラギノ角ゴ Pro W3','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-    }
-</style>
 </body>
 <script src="{{ 'js/app.js' }}"></script>
 </html>
