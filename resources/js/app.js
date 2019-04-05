@@ -37,9 +37,9 @@ Vue.prototype.$axios = axios; // この行を追加
 const router = new VueRouter({
     mode: 'history',
     routes: [
-        { path: '/', component: require('./components/Index.vue').default },
-        { path: '/register', component: require('./components/Register.vue').default},
-        { path: '/about', component: require('./components/About.vue').default},
+        { path: '/public', component: require('./components/Index.vue').default },
+        { path: '/public/register', component: require('./components/Register.vue').default},
+        { path: '/public/about', component: require('./components/About.vue').default},
     ]
 });
 
