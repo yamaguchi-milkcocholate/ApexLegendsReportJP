@@ -27,7 +27,7 @@
     <div class="contents">
         <div class="content">
             <div class="eye-catch"
-                style="background: #FFF url('public/images/eye-catch-edit.jpg') no-repeat center top scroll;"
+                 style="background: #FFF url('public/images/eye-catch-edit.jpg') no-repeat center top scroll;"
             >
             </div>
             <div class="nav report-nav">
