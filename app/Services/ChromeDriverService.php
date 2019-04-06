@@ -24,7 +24,7 @@ class ChromeDriverService
 
     public function __construct()
     {
-        $this->seleniumServerUrl = 'http://localhost:4444/wd/hub';
+        $this->seleniumServerUrl = 'http://0.0.0.0:4444/wd/hub';
         $this->options = (new ChromeOptions)->addArguments([
             '--disable-gpu',
             '--headless',
