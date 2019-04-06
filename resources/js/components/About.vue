@@ -3,7 +3,7 @@
         <div class="header">
             <div class="header-left">
                 <div class="app-name">
-                    <a href="/public">ApexLegendsReportJP</a>
+                    <p>ApexLegendsReportJP</p>
                 </div>
             </div>
             <div class="header-center">
