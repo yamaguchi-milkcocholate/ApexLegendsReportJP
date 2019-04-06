@@ -103,7 +103,7 @@ export default {
                 console.log('報告中に新しい報告はできません!!');
                 return;
             }
-            let url = location.href + 'api/v1/report';
+            let url =  + 'http://apex-legends-report-jp.herokuapp.com/public/api/v1/report';
             let params = {
                 id: this.your_id,
                 email: this.your_email,
@@ -170,7 +170,7 @@ export default {
         initHackers() {
             let setUpdateButton = this.setUpdateButton;
             setUpdateButton(true);
-            let url = location.href + 'api/v1/init';
+            let url = 'http://apex-legends-report-jp.herokuapp.com/public/api/v1/init';
             let setHackers = this.setHackers;
             this.$axios.post(url)
                 .then( (response) => {
